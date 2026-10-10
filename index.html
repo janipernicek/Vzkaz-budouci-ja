@@ -3,913 +3,567 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f9f5f7">
-<meta name="description" content="Vzkazy od budoucího já. Zastav se, otevři si dopis a připomeň si ženu, kterou se postupně stáváš.">
+<meta name="theme-color" content="#F9F6F2">
+<meta name="description" content="Vzkazy od tvého budoucího já. Chvíle pro sebe, která může změnit tvůj pohled na život.">
 <title>Vzkazy od budoucího já</title>
-
 <style>
 :root {
-  --pink: #f4a7b9;
-  --pink-light: #fcecf1;
-  --lilac: #c9a8d4;
-  --mint: #7ececa;
-  --cream: #f9f6f2;
-  --gold: #c6a15b;
-  --ink: #493d4b;
-  --muted: #847584;
-  --white: #ffffff;
+  --cream:#F9F6F2;
+  --pink:#F4A7B9;
+  --purple:#C9A8D4;
+  --teal:#7ECECA;
+  --dark:#382C40;
+  --muted:#796D7D;
+  --white:#FFFFFF;
 }
-
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Nunito","Trebuchet MS",sans-serif;
+  background:var(--cream);
+  color:var(--dark);
+  line-height:1.65;
+  min-height:100vh;
 }
-
-html {
-  scroll-behavior: smooth;
+button{font:inherit}
+button:focus-visible{
+  outline:3px solid var(--teal);
+  outline-offset:4px;
 }
-
-body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--ink);
-  font-family: "Nunito", "Lato", Arial, sans-serif;
-  line-height: 1.7;
+.page{max-width:850px;margin:auto;padding:22px 18px 55px}
+.top{text-align:center;padding:24px 0 32px}
+.logo{
+  width:65px;height:65px;margin:0 auto 17px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;
+  box-shadow:0 7px 22px #64466420;
 }
-
-button {
-  font: inherit;
+.eyebrow{
+  font-size:11px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:#8C6F98;margin-bottom:12px;
 }
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  padding: 58px 20px 48px;
-  text-align: center;
-  background:
-    radial-gradient(circle at 10% 20%, #ffffffa8 0 5%, transparent 20%),
-    radial-gradient(circle at 90% 70%, #ffffff80 0 8%, transparent 24%),
-    linear-gradient(140deg, #fce8ee, #eee4f5 55%, #e1f4ef);
+h1{
+  font-family:Georgia,serif;
+  font-size:clamp(36px,8vw,57px);
+  font-weight:normal;line-height:1.12;
+  letter-spacing:-1.4px;margin-bottom:17px;
 }
-
-.hero::before,
-.hero::after {
-  content: "✧";
-  position: absolute;
-  color: #ffffffb0;
-  font-size: 65px;
+h1 span{display:block;color:#A67CB3;font-style:italic}
+.intro{max-width:520px;margin:auto;font-size:15px;color:var(--muted)}
+.welcome{
+  background:white;border:1px solid #C9A8D459;
+  border-radius:24px;padding:27px 24px;
+  margin:0 auto 34px;text-align:center;
+  box-shadow:0 8px 30px #4C314C0A;
 }
-
-.hero::before {
-  top: 15px;
-  left: 8%;
+.small-title{
+  font-size:11px;text-transform:uppercase;
+  letter-spacing:2px;font-weight:800;
+  color:#A67CB3;margin-bottom:10px;
 }
-
-.hero::after {
-  right: 8%;
-  bottom: 5px;
+.welcome p:not(.small-title){
+  font-family:Georgia,serif;font-size:19px;line-height:1.6;
 }
-
-.eyebrow {
-  margin: 0 0 10px;
-  font-size: 0.78rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #8f748e;
+.welcome .signature{
+  margin-top:13px;font-family:inherit;
+  font-size:13px;color:var(--muted);font-style:italic;
 }
-
-.hero h1 {
-  max-width: 720px;
-  margin: 0 auto;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: normal;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  line-height: 1.15;
+.section-heading{text-align:center;margin-bottom:23px}
+.section-heading h2{
+  font-family:Georgia,serif;font-size:29px;font-weight:normal;
+  margin-bottom:7px;
 }
-
-.hero h1 span {
-  display: block;
-  color: #a67caf;
-  font-style: italic;
+.section-heading p{font-size:13px;color:var(--muted)}
+.progress-wrap{margin:0 auto 25px;max-width:440px}
+.progress-label{
+  display:flex;justify-content:space-between;
+  gap:10px;font-size:12px;color:var(--muted);margin-bottom:8px;
 }
-
-.hero-text {
-  max-width: 540px;
-  margin: 20px auto 0;
-  font-size: 1.05rem;
+.progress-track{
+  height:6px;background:#EAE1E9;
+  border-radius:20px;overflow:hidden;
 }
-
-.hero-decoration {
-  margin-top: 22px;
-  color: var(--gold);
-  letter-spacing: 8px;
-  font-size: 1.3rem;
+.progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--teal));
+  border-radius:20px;transition:width .3s ease;
 }
-
-main {
-  width: min(100% - 30px, 900px);
-  margin: 0 auto;
-  padding: 38px 0 65px;
+.cards{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;
 }
-
-.intro {
-  max-width: 650px;
-  margin: 0 auto 34px;
-  text-align: center;
+.card{
+  min-height:175px;border:0;background:transparent;
+  perspective:1000px;cursor:pointer;border-radius:19px;
+  -webkit-tap-highlight-color:transparent;
 }
-
-.intro h2,
-.letter h2 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: normal;
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  line-height: 1.3;
+.card-inner{
+  position:relative;width:100%;height:175px;
+  transition:transform .65s cubic-bezier(.2,.75,.3,1);
+  transform-style:preserve-3d;display:block;
 }
-
-.intro p {
-  color: var(--muted);
+.card.is-flipped .card-inner{transform:rotateY(180deg)}
+.card-face{
+  position:absolute;inset:0;border-radius:19px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:14px 9px;
+  text-align:center;overflow:hidden;
 }
-
-.instruction {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 9px 17px;
-  border-radius: 30px;
-  background: #ffffffb8;
-  font-size: 0.9rem;
+.card-front{
+  background:linear-gradient(145deg,#FFF,#F3E8F5);
+  border:1px solid #C9A8D4A6;
+  box-shadow:0 5px 15px #4C314C0D;
 }
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+.card:nth-child(3n+2) .card-front{
+  background:linear-gradient(145deg,#FFF,#FCE8EC);
+  border-color:#F4A7B9B3;
 }
-
-.card {
-  min-width: 0;
-  height: 235px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  perspective: 1000px;
-  -webkit-tap-highlight-color: transparent;
+.card:nth-child(3n) .card-front{
+  background:linear-gradient(145deg,#FFF,#E5F6F3);
+  border-color:#7ECECAB3;
 }
-
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
+.card-number{
+  position:absolute;top:10px;left:12px;
+  font-size:10px;font-weight:800;letter-spacing:1px;color:#9A819F;
 }
-
-.card.flipped .card-inner {
-  transform: rotateY(180deg);
+.card-symbol{font-size:31px;margin-bottom:8px}
+.card-label{font-family:Georgia,serif;font-size:16px;line-height:1.3}
+.card-hint{font-size:10px;color:var(--muted);margin-top:8px}
+.card-back{
+  background:linear-gradient(145deg,#5D4268,#80648D);
+  color:white;transform:rotateY(180deg);
+  box-shadow:0 6px 20px #4C314C26;
 }
-
-.card-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 18px 12px;
-  border: 1px solid #e9dbe7;
-  border-radius: 19px;
-  box-shadow: 0 7px 20px #4b34480c;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  overflow: hidden;
+.card-back .card-symbol{font-size:27px}
+.card-back .card-label{font-size:14px;line-height:1.4}
+.card-back .card-hint{color:#FFFFFFCC}
+.letter-area{margin-top:31px;scroll-margin-top:20px}
+.letter{
+  display:none;background:white;border-radius:25px;
+  border:1px solid #C9A8D475;padding:29px 23px;
+  box-shadow:0 10px 35px #4C314C0F;
+  animation:appear .45s ease;
 }
-
-.card-front {
-  background:
-    radial-gradient(circle at 100% 0%, #ffffffb8, transparent 45%),
-    linear-gradient(150deg, #fbe7ed, #eee4f5);
+.letter.active{display:block}
+@keyframes appear{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
 }
-
-.card-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(145deg, #fffdfb, #e8f5f1);
+.letter-top{text-align:center;margin-bottom:21px}
+.letter-icon{font-size:31px;margin-bottom:9px}
+.letter-kicker{
+  color:#A67CB3;text-transform:uppercase;
+  letter-spacing:2px;font-size:10px;font-weight:800;margin-bottom:7px;
 }
-
-.card-number {
-  position: absolute;
-  top: 14px;
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  color: #947e98;
+.letter h3{
+  font-family:Georgia,serif;font-weight:normal;
+  font-size:29px;line-height:1.2;
 }
-
-.card-symbol {
-  display: block;
-  margin: 10px 0;
-  color: var(--gold);
-  font-size: 2.6rem;
-  line-height: 1.2;
+.letter-body{
+  font-family:Georgia,serif;font-size:17px;
+  line-height:1.85;white-space:pre-line;
 }
-
-.card-title {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.18rem;
-  line-height: 1.35;
+.letter-body p{margin-bottom:17px}
+.letter-body .letter-signature{
+  color:#A67CB3;font-style:italic;margin-top:22px;
 }
-
-.card-hint {
-  margin: 14px 0 0;
-  font-size: 0.78rem;
-  color: var(--muted);
+.reflection,.action{border-radius:17px;padding:20px;margin-top:14px}
+.reflection{background:#F8F0F8}
+.action{background:#EFF8F6}
+.reflection h4,.action h4{
+  font-size:11px;text-transform:uppercase;
+  letter-spacing:1.5px;margin-bottom:9px;color:#926B9D;
 }
-
-.card-back .card-symbol {
-  font-size: 2rem;
+.action h4{color:#397F7A}
+.reflection p,.action p{font-size:14px;line-height:1.7}
+.letter-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  min-height:44px;padding:11px 17px;border:0;border-radius:30px;
+  cursor:pointer;font-size:12px;font-weight:800;
+  transition:transform .2s ease,opacity .2s ease;
 }
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#795C85;color:white}
+.btn-light{background:#F3EAF5;color:#684D73}
+.btn-teal{background:#DDF3EF;color:#356F6A}
 
-.card-back .card-title {
-  font-size: 1.05rem;
+  @media(max-width:520px){
+  .page{padding:13px 12px 40px}
+  .top{padding:18px 0 26px}
+  .welcome{padding:23px 17px}
+  .cards{gap:9px}
+  .card,.card-inner{min-height:150px;height:150px}
+  .card-face{padding:11px 5px;border-radius:15px}
+  .card{border-radius:15px}
+  .card-symbol{font-size:26px}
+  .card-label{font-size:13px}
+  .card-hint{font-size:9px}
+  .card-number{top:8px;left:8px;font-size:9px}
+  .letter{padding:24px 17px}
+  .letter h3{font-size:26px}
+  .letter-body{font-size:16px}
+  .letter-actions .btn{flex:1 1 100%}
 }
-
-.card-back .card-hint {
-  text-align: center;
-}
-
-.card:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 5px;
-  border-radius: 20px;
-}
-
-.letter {
-  display: none;
-  margin-top: 38px;
-  padding: clamp(22px, 5vw, 45px);
-  border: 1px solid #e9dbe7;
-  border-radius: 24px;
-  background:
-    radial-gradient(circle at 100% 0%, #fcecf1 0, transparent 38%),
-    #fffdfb;
-  box-shadow: 0 12px 40px #493d4b0d;
-  animation: appear 0.55s ease both;
-}
-
-.letter.visible {
-  display: block;
-}
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.letter-top {
-  margin-bottom: 22px;
-  text-align: center;
-}
-
-.letter-top .symbol {
-  color: var(--gold);
-  font-size: 2rem;
-}
-
-.letter-top .label {
-  margin: 5px 0;
-  color: #a17eaa;
-  font-size: 0.75rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.letter h2 {
-  margin: 8px 0 15px;
-  text-align: center;
-}
-
-.letter-body {
-  max-width: 650px;
-  margin: 0 auto;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.12rem;
-  white-space: pre-line;
-}
-
-.letter-signature {
-  margin-top: 25px;
-  text-align: right;
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  color: #9878a1;
-  font-size: 1.15rem;
-}
-
-.prompt {
-  max-width: 650px;
-  margin: 24px auto 0;
-  padding: 19px 21px;
-  border-radius: 15px;
-  background: #f8edf3;
-}
-
-.prompt h3 {
-  margin: 0 0 5px;
-  font-size: 0.95rem;
-}
-
-.prompt p {
-  margin: 0;
-}
-
-.prompt.action {
-  background: #eaf5f1;
-}
-
-.letter-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 25px;
-}
-
-.btn {
-  min-height: 45px;
-  padding: 11px 19px;
-  border: 1px solid #d9c7dd;
-  border-radius: 30px;
-  background: white;
-  color: var(--ink);
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-.btn-primary {
-  border-color: #92759d;
-  background: #92759d;
-  color: white;
-}
-
-.status {
-  min-height: 24px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #638a7c;
-}
-
-.closing {
-  max-width: 600px;
-  margin: 55px auto 0;
-  text-align: center;
-}
-
-.closing .ornament {
-  color: var(--gold);
-  font-size: 1.5rem;
-}
-
-.closing p {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
-  font-style: italic;
-}
-
-footer {
-  padding: 27px 16px;
-  text-align: center;
-  background: #f1e8f0;
-  color: #78687d;
-  font-size: 0.85rem;
-}
-
-footer p {
-  margin: 4px 0;
-}
-
-@media (max-width: 600px) {
-  .hero {
-    padding: 45px 17px 36px;
-  }
-
-  main {
-    width: min(100% - 24px, 900px);
-    padding-top: 28px;
-  }
-
-  .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .card {
-    height: 205px;
-  }
-
-  .card-face {
-    padding: 14px 8px;
-  }
-
-  .card-title {
-    font-size: 1.05rem;
-  }
-
-  .card-symbol {
-    font-size: 2.2rem;
-  }
-
-  .letter {
-    margin-top: 25px;
-    padding: 23px 17px;
-  }
-
-  .letter-body {
-    font-size: 1.05rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .card-inner {
-    transition: none;
-  }
-
-  .letter {
-    animation: none;
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
   }
 }
 </style>
 </head>
-
 <body>
-
-<header class="hero">
-  <p class="eyebrow">Chvíle jen pro tebe</p>
-  <h1>Vzkazy <span>od budoucího já</span></h1>
-  <p class="hero-text">
-    Dopisy od ženy, kterou se postupně stáváš.
-    Zastav se, vyber si kartičku a přečti si, co potřebuješ slyšet právě dnes.
-  </p>
-  <div class="hero-decoration">✧ ♡ ✧</div>
+<main class="page">
+<header class="top">
+  <div class="logo" aria-hidden="true">💌</div>
+  <p class="eyebrow">Malý návrat k sobě</p>
+  <h1>Vzkazy od <span>budoucího já</span></h1>
+  <p class="intro">Někde před tebou je žena, kterou se postupně stáváš. Dnes ti má co říct. Dopřej si chvíli, otevři si vzkaz a nech ho v sobě chvíli doznít.</p>
 </header>
-
-<main>
-  <section class="intro">
-    <h2>Co ti dnes chceš připomenout?</h2>
-    <p>
-      Představ si sebe samu v budoucnosti.
-      Ženu, která se už nemusí tolik snažit všem něco dokazovat.
-      Ženu, která se lépe zná, důvěřuje svým hodnotám a dovoluje si žít.
-    </p>
-    <p>
-      Vyber si jednu kartičku. Nehledej tu správnou.
-      Nech se vést zvědavostí a dopřej si chvíli pro sebe.
-    </p>
-    <div class="instruction">♡ Klepni na kartičku a otoč ji ♡</div>
-  </section>
-
-  <section class="cards" id="cards" aria-label="Dvanáct kartiček">
-  </section>
-
-  <section class="letter" id="letter" aria-live="polite">
-    <div class="letter-top">
-      <div class="symbol" id="letterSymbol">♡</div>
-      <p class="label">Dopis od tvého budoucího já</p>
-      <h2 id="letterTitle"></h2>
+<section class="welcome">
+  <p class="small-title">Než začneš</p>
+  <p>Nemusíš dnes vyřešit celý svůj život. Stačí se na chvíli zastavit a zaposlouchat se do toho, co už dávno někde uvnitř víš.</p>
+  <p class="signature">S láskou, tvoje budoucí já. 🤍</p>
+</section>
+<section aria-labelledby="cards-heading">
+  <div class="section-heading">
+    <p class="eyebrow">Tvůj osobní okamžik</p>
+    <h2 id="cards-heading">Který vzkaz tě přitahuje?</h2>
+    <p>Vyber si kartičku podle pocitu. Nemusíš nad tím přemýšlet.</p>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Tvoje cesta</span><span id="progress-text">0 z 12 otevřeno</span>
     </div>
-
-    <div class="letter-body" id="letterBody"></div>
-
-    <div class="letter-signature">
-      S láskou, tvoje budoucí já ♡
+    <div class="progress-track" role="progressbar" aria-label="Počet otevřených vzkazů" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" id="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
     </div>
+  </div>
+  <div class="cards" id="cards">
+    <button class="card" type="button" data-letter="0" aria-label="Otevřít vzkaz 1: Když o sobě pochybuješ">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">01</span><span class="card-symbol">🪞</span><span class="card-label">Když o sobě pochybuješ</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🤍</span><span class="card-label">Tvá hodnota není otázka.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="1" aria-label="Otevřít vzkaz 2: Když toho máš příliš">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">02</span><span class="card-symbol">🌿</span><span class="card-label">Když toho máš příliš</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🍃</span><span class="card-label">Nemusíš nést všechno.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="2" aria-label="Otevřít vzkaz 3: Když se bojíš změny">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">03</span><span class="card-symbol">🦋</span><span class="card-label">Když se bojíš změny</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">✨</span><span class="card-label">Nemusíš znát celou cestu.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="3" aria-label="Otevřít vzkaz 4: Když se srovnáváš">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">04</span><span class="card-symbol">🌷</span><span class="card-label">Když se srovnáváš</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🌸</span><span class="card-label">Tvoje cesta je tvoje.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="4" aria-label="Otevřít vzkaz 5: Když zapomínáš na sebe">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">05</span><span class="card-symbol">🕊️</span><span class="card-label">Když zapomínáš na sebe</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">💗</span><span class="card-label">I ty patříš do svého života.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="5" aria-label="Otevřít vzkaz 6: Když stojíš na místě">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">06</span><span class="card-symbol">🌱</span><span class="card-label">Když stojíš na místě</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🌿</span><span class="card-label">I kořeny rostou potichu.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
 
-    <div class="prompt">
-      <h3>♡ Otázka jen pro tebe</h3>
-      <p id="letterQuestion"></p>
-    </div>
+    <button class="card" type="button" data-letter="6" aria-label="Otevřít vzkaz 7: Když potřebuješ říct ne">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">07</span><span class="card-symbol">🛡️</span><span class="card-label">Když potřebuješ říct ne</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🗝️</span><span class="card-label">Hranice nejsou vina.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="7" aria-label="Otevřít vzkaz 8: Když se bojíš selhání">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">08</span><span class="card-symbol">🔥</span><span class="card-label">Když se bojíš selhání</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">⭐</span><span class="card-label">Nemusíš být dokonalá.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="8" aria-label="Otevřít vzkaz 9: Když potřebuješ zpomalit">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">09</span><span class="card-symbol">☁️</span><span class="card-label">Když potřebuješ zpomalit</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🌙</span><span class="card-label">Odpočinek není odměna.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="9" aria-label="Otevřít vzkaz 10: Když hledáš svou cestu">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">10</span><span class="card-symbol">🧭</span><span class="card-label">Když hledáš svou cestu</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🌅</span><span class="card-label">Začni tím, co je pravdivé.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="10" aria-label="Otevřít vzkaz 11: Když potřebuješ znovu věřit">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">11</span><span class="card-symbol">💎</span><span class="card-label">Když potřebuješ znovu věřit</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🩷</span><span class="card-label">Ještě není dopsáno.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+    <button class="card" type="button" data-letter="11" aria-label="Otevřít vzkaz 12: Když chceš žít jinak">
+      <span class="card-inner">
+        <span class="card-face card-front"><span class="card-number">12</span><span class="card-symbol">🌞</span><span class="card-label">Když chceš žít jinak</span><span class="card-hint">Otevři svůj vzkaz ↗</span></span>
+        <span class="card-face card-back"><span class="card-symbol">🌈</span><span class="card-label">Tvůj život se děje právě teď.</span><span class="card-hint">Přečti si dopis ↓</span></span>
+      </span>
+    </button>
+  </div>
+</section>
 
-    <div class="prompt action">
-      <h3>✧ Jeden malý krok</h3>
-      <p id="letterAction"></p>
-    </div>
+<section class="letter-area" id="letter-area" aria-live="polite" aria-atomic="true">
+<article class="letter" id="letter-0">
+  <div class="letter-top"><div class="letter-icon">🪞</div><p class="letter-kicker">Vzkaz 1 · Pro chvíle pochybností</p><h3>Tvá hodnota není otázka.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>Píšu ti z místa, kde už nepotřebuju každý den dokazovat, že jsem dost dobrá. Nemusíš si zasloužit místo na tomhle světě tím, kolik toho zvládneš.</p>
+    <p>Znám ty chvíle, kdy vidíš hlavně to, co ještě není hotové. Plány, které čekají. Ženu, kterou bys podle svého názoru už dávno měla být.</p>
+    <p>Ale podívej se na sebe ještě jednou. Ne očima přísné hodnotitelky. Podívej se na sebe jako na člověka, který toho hodně nese, učí se a znovu vstává.</p>
+    <p>Nemusíš se nejdřív opravit, abys se sebou mohla být spokojená. Přestaň se k sobě chovat jako k projektu, který nikdy není dokončený.</p>
+    <p class="letter-signature">Jsem na tvé straně. Vždycky. 🤍</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Kdyby tvoje nejlepší kamarádka žila přesně tvůj život, co bys na ní ocenila místo výčitek za to, co nestíhá?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Napiš si tři věci, které na sobě oceňuješ a které nesouvisejí s výkonem, vzhledem ani penězi.</p></div>
+</article>
 
-    <div class="letter-buttons">
-      <button class="btn btn-primary" id="copyButton">
-        Zkopírovat celý dopis
-      </button>
-      <button class="btn" id="chooseAgain">
-        Vybrat jinou kartičku
-      </button>
-    </div>
+<article class="letter" id="letter-1">
+  <div class="letter-top"><div class="letter-icon">🌿</div><p class="letter-kicker">Vzkaz 2 · Pro chvíle přetížení</p><h3>Nemusíš nést všechno.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>vím, jaké to je mít hlavu plnou otevřených záložek. Každá něco potřebuje. A i když si konečně sedneš, tělo možná pořád čeká, co dalšího přijde.</p>
+    <p>Odpočinek není další úkol, který musíš splnit správně. Nemusíš se naučit dokonale meditovat ani se za každou cenu uklidnit. Někdy stačí přestat přidávat další požadavky.</p>
+    <p>Opři chodidla o zem. Rozhlédni se kolem sebe. Všimni si, že právě teď nemusíš vyřešit úplně všechno.</p>
+    <p>To, že něco zvládneš, neznamená, že to musíš zvládnout sama. Požádat o pomoc není slabost.</p>
+    <p class="letter-signature">Dnes nemusíš zachránit celý svět. Začni u sebe. 🌿</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Kterou jednu věc dnes můžeš odložit, zjednodušit nebo někomu předat?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Na minutu se opři, polož chodidla na zem a pomalu vydechni. Jen si všimni, jak ti právě je.</p></div>
+</article>
 
-    <p class="status" id="status" role="status"></p>
-  </section>
+<article class="letter" id="letter-2">
+  <div class="letter-top"><div class="letter-icon">🦋</div><p class="letter-kicker">Vzkaz 3 · Pro chvíle nejistoty</p><h3>Nemusíš znát celou cestu.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>kdysi jsem si myslela, že než udělám důležitý krok, musím si být jistá. Že nejdřív přijde klid, potom odvaha a nakonec akce.</p>
+    <p>Jenže často je to opačně. Uděláš malý krok, získáš zkušenost a teprve potom začneš víc věřit sama sobě.</p>
+    <p>Nemusíš vědět, jak bude vypadat celý příští rok. Potřebuješ jen rozpoznat svůj nejbližší poctivý krok.</p>
+    <p>Strach někdy chrání před nebezpečím. Jindy se ozývá, protože vstupuješ do něčeho nového. Uč se rozlišovat mezi obojím. Nemusíš každému pocitu okamžitě uvěřit ani ho umlčet.</p>
+    <p class="letter-signature">Odvaha někdy vypadá jen jako jeden malý krok. 🦋</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Co bys udělala jako první, kdybys nemusela mít jistotu, že všechno dopadne dokonale?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Vyber jednu věc, kterou odkládáš. Věnuj jí deset minut. Nemusíš ji dokončit. Jen začni.</p></div>
+</article>
 
-  <section class="closing">
-    <div class="ornament">✧ ♡ ✧</div>
-    <p>
-      Jednou přijde chvíle, kdy už nebudeš chtít nic dokazovat.
-      Budeš chtít prostě žít tak, aby ti v tom vlastním životě bylo dobře.
-    </p>
-    <div class="ornament">♡</div>
-  </section>
+  <article class="letter" id="letter-3">
+  <div class="letter-top"><div class="letter-icon">🌷</div><p class="letter-kicker">Vzkaz 4 · Pro chvíle srovnávání</p><h3>Tvoje cesta je tvoje.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>na internetu uvidíš ženu, která podniká, vypadá skvěle, má uklizený domov a zřejmě jí všechno vychází. A uvnitř se ozve otázka: proč to já nemám stejně?</p>
+    <p>Nevidíš její celý život. Vidíš vybrané okamžiky. A potom proti nim postavíš všechny své pochybnosti a obyčejné úterý, kdy ti nic nejde podle představ.</p>
+    <p>Inspirace ti může ukázat nové možnosti. Srovnávání ti často bere chuť udělat něco vlastního. Když tě něčí úspěch inspiruje, vezmi si nápad. Když se kvůli němu cítíš menší, zavři aplikaci a vrať se ke svému životu.</p>
+    <p class="letter-signature">Nemusíš být jinou ženou, abys vytvořila krásný život. 🌷</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Co bys chtěla dělat jinak, kdybys neměla možnost sledovat, jak žijí ostatní?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Odlož sociální sítě a udělej jednu drobnost pro svůj vlastní život. Bez sdílení a dokazování.</p></div>
+</article>
+
+<article class="letter" id="letter-4">
+  <div class="letter-top"><div class="letter-icon">🕊️</div><p class="letter-kicker">Vzkaz 5 · Pro chvíle, kdy se ztrácíš</p><h3>I ty patříš do svého života.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>umíš přemýšlet o tom, co potřebují druzí. Někdy tak dobře, že si vlastních potřeb všimneš až ve chvíli, kdy jsi unavená nebo už nemáš z čeho dávat.</p>
+    <p>Nechci, abys přestala být laskavá. Chci, abys do své laskavosti zahrnula i sebe.</p>
+    <p>Můžeš milovat rodinu a potřebovat chvíli o samotě. Můžeš pomáhat a zároveň říct, že dnes už nemůžeš. Můžeš být vděčná za svůj život a přitom chtít, aby se něco změnilo.</p>
+    <p>Tyhle věci se nevylučují. Nemusíš čekat na vyčerpání, abys měla právo odpočívat.</p>
+    <p class="letter-signature">Nejsi poslední člověk, na kterého zbude čas. 💗</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Kterou svou potřebu už nějakou dobu odsouváš, protože se ti zdá méně důležitá než potřeby ostatních?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Vyhraď si patnáct minut na něco, co tě opravdu těší. Nemusíš si to ničím zasloužit.</p></div>
+</article>
+
+<article class="letter" id="letter-5">
+  <div class="letter-top"><div class="letter-icon">🌱</div><p class="letter-kicker">Vzkaz 6 · Pro chvíle stagnace</p><h3>I kořeny rostou potichu.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>znám ten pocit, kdy máš dojem, že se pořád snažíš, ale výsledky nikde. Něco začneš, přijde náročnější období a ty máš pocit, že jsi zase na začátku.</p>
+    <p>Život není tabulka, ve které každý den musí přibýt zelené číslo. Někdy se učíš. Někdy se zotavuješ. Někdy zjišťuješ, že cesta, kterou sis vybrala, není tvoje.</p>
+    <p>To všechno jsou informace. Nemusíš každou změnu směru nazývat selháním.</p>
+    <p>Všímej si i toho, co dnes zvládáš jinak než před rokem. Jaké hranice umíš nastavit. Co už o sobě víš. Kde se dokážeš zastavit dřív, než překročíš vlastní limity.</p>
+    <p class="letter-signature">To, co ještě není vidět, nemusí být zbytečné. 🌱</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>V čem jsi dnes dál než před rokem, i když to zatím nepřineslo výsledek, který sis přála?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Zapiš si jeden posun, kterého sis dosud nevážila. Něco skutečného, co bys před rokem ještě neuměla.</p></div>
+</article>
+
+<article class="letter" id="letter-6">
+  <div class="letter-top"><div class="letter-icon">🛡️</div><p class="letter-kicker">Vzkaz 7 · Pro chvíle, kdy potřebuješ hranice</p><h3>Hranice nejsou vina.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>někdy řekneš ano, protože nechceš nikoho zklamat. Protože se bojíš konfliktu. Protože si říkáš, že to přece nějak zvládneš.</p>
+    <p>A potom přijde únava, odpor nebo vztek. Někdy ne proto, že druzí udělali něco špatně, ale protože jsi sama sebe vynechala z rozhodování.</p>
+    <p>Nemusíš říkat ne tvrdě. Můžeš být laskavá a přitom jasná. Můžeš říct: „Teď na to nemám kapacitu.“ Nemusíš předkládat deset důvodů, proč máš právo rozhodnout o svém čase.</p>
+    <p>Nepříjemný pocit po nastavení hranice automaticky neznamená, že jsi udělala něco špatně.</p>
+    <p class="letter-signature">Laskavost k druhým nemusí znamenat opuštění sebe. 🛡️</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Kde nejčastěji říkáš ano, přestože uvnitř cítíš ne?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Než příště na něco kývneš, dej si chvíli na rozmyšlenou. „Ozvu se ti, až si to promyslím“ úplně stačí.</p></div>
+</article>
+
+<article class="letter" id="letter-7">
+  <div class="letter-top"><div class="letter-icon">🔥</div><p class="letter-kicker">Vzkaz 8 · Pro chvíle strachu</p><h3>Nemusíš být dokonalá.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>někdy se tolik soustředíš na to, aby něco dopadlo dobře, že ti samotná cesta přestane dělat radost. Každý krok kontroluješ a než něco ukážeš světu, chceš mít jistotu, že už na tom nikdo nenajde nedokonalost.</p>
+    <p>Jenže dokonalost je zvláštní podmínka. Pořád ji posouváš dál, takže nikdy nedostaneš povolení začít žít.</p>
+    <p>Chyba není vždycky příjemná. Někdy něco pokazíš a musíš to napravit. Ale neznamená to, že jsi neschopná. Znamená to, že se můžeš poučit.</p>
+    <p>Nemusíš se zbavit strachu ze selhání, než začneš. Stačí přestat mu dávat právo rozhodovat o každém kroku.</p>
+    <p class="letter-signature">Dovol si být začátečnicí, i když už jsi dospělá žena. 🔥</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Co odkládáš jen proto, že se bojíš, že to napoprvé nebude dost dobré?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Udělej jednu věc v její první, nedokonalé verzi. Vylepšovat můžeš později.</p></div>
+</article>
+
+  <article class="letter" id="letter-8">
+  <div class="letter-top"><div class="letter-icon">☁️</div><p class="letter-kicker">Vzkaz 9 · Pro chvíle únavy</p><h3>Odpočinek není odměna.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>kolikrát sis řekla, že si odpočineš, až bude uklizeno, hotovo, vyřízeno a všichni spokojení?</p>
+    <p>Jenže běžný život nemá poslední úkol. Jakmile jeden dokončíš, objeví se další. Kdybys čekala na okamžik, kdy nebude vůbec nic potřeba, mohla bys čekat velmi dlouho.</p>
+    <p>Odpočinek není medaile za práci. Je jednou z podmínek, díky kterým můžeš dlouhodobě fungovat. Někdy je to deset minut bez obrazovky nebo večer, kdy se rozhodneš, že už dnes nic dalšího nezačneš.</p>
+    <p>Únava může ovlivnit i to, jak svůj život vnímáš. Nemusíš každou těžkou myšlenku řešit ve chvíli, kdy už nemáš sílu.</p>
+    <p class="letter-signature">Nemusíš se vyčerpat, abys měla právo zastavit se. 🌙</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Co by se změnilo, kdybys odpočinek brala jako běžnou součást dne?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Vyber jednu povinnost, která dnes nemusí být hotová. Vědomě ji odlož a dopřej si chvíli klidu.</p></div>
+</article>
+
+<article class="letter" id="letter-9">
+  <div class="letter-top"><div class="letter-icon">🧭</div><p class="letter-kicker">Vzkaz 10 · Pro chvíle hledání</p><h3>Začni tím, co je pravdivé.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>někdy hledáš správnou odpověď tak dlouho, až přestaneš slyšet vlastní otázku. Ptáš se, co bys měla dělat, co si pomyslí druzí a co když se rozhodneš špatně.</p>
+    <p>Zkus se vrátit k něčemu jednoduššímu. Co je teď skutečně důležité? Co víš jistě? Co si jen domýšlíš? A co potřebuješ zjistit, než se rozhodneš?</p>
+    <p>Nemusíš každou intuici považovat za neomylné vedení. Někdy k tobě promlouvá zkušenost, jindy strach nebo únava. Dej svému pocitu prostor, ale spoj ho také s realitou, fakty a časem na rozmyšlenou.</p>
+    <p>Rozhodnutí nemusí být dokonalé, aby bylo poctivé.</p>
+    <p class="letter-signature">Vrať se k tomu, co víš, ne k tomu, čeho se bojíš. 🧭</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Kdyby ses na svou situaci podívala bez strachu z názoru ostatních, co bys viděla jasněji?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Napiš si tři sloupce: Co vím. Čeho se bojím. Co potřebuji zjistit.</p></div>
+</article>
+
+<article class="letter" id="letter-10">
+  <div class="letter-top"><div class="letter-icon">💎</div><p class="letter-kicker">Vzkaz 11 · Pro chvíle, kdy ztrácíš víru</p><h3>Ještě není dopsáno.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>znám dny, kdy se ohlédneš a přemýšlíš, jestli už jsi neměla být někde úplně jinde. Jestli jsi nepromarnila příležitosti. Jestli jsi neměla některé věci pochopit dřív.</p>
+    <p>Život není příběh, ve kterém musíš v určitém věku splnit všechny kapitoly. Některé věci pochopíš až tehdy, když jimi projdeš. Některé plány přestaneš chtít.</p>
+    <p>Nemusíš popírat, co tě mrzí. Můžeš litovat některých rozhodnutí a přesto se rozhodnout, že dnešek nebude jejich pokračováním.</p>
+    <p>Důvěra v sebe neznamená, že si budeš vždycky jistá. Znamená i to, že když něco nevyjde, nebudeš se kvůli tomu navždy považovat za ztracený případ.</p>
+    <p class="letter-signature">Tvůj příběh pokračuje. Další stránku můžeš začít psát právě dnes. 💎</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Kterou minulou chybu si stále připomínáš, přestože už ses z ní něco naučila?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Dokonči větu: „Dnes už vím něco, co jsem tehdy vědět nemohla, a proto si odpouštím…“</p></div>
+</article>
+
+<article class="letter" id="letter-11">
+  <div class="letter-top"><div class="letter-icon">🌞</div><p class="letter-kicker">Vzkaz 12 · Pro chvíle touhy po změně</p><h3>Tvůj život se děje právě teď.</h3></div>
+  <div class="letter-body">
+    <p>Milá Jani,</p>
+    <p>jednou přijde chvíle, kdy už nebudeš chtít nic dokazovat. Nebudeš chtít být výkonnější, dokonalejší ani silnější za každou cenu. Budeš chtít prostě žít tak, aby ti v tom vlastním životě bylo dobře.</p>
+    <p>A víš, co bych si přála, abys pochopila už teď? Že na tenhle okamžik nemusíš čekat.</p>
+    <p>Nemusíš nejdřív zhubnout, vydělat určitou částku, vyřešit všechny vztahy nebo mít uklizený domov. Můžeš začít vytvářet život, ve kterém ti bude lépe, i když některé věci ještě nejsou vyřešené.</p>
+    <p>Změna nemusí začít velkým rozhodnutím. Někdy začne tím, že přestaneš ignorovat vlastní únavu, dovolíš si chtít něco jiného a začneš se ptát, jak chceš žít ty.</p>
+    <p>Nemusíš se stát někým jiným. Potřebuješ vytvořit víc prostoru pro ženu, kterou už jsi.</p>
+    <p class="letter-signature">Nečekej na dokonalejší život. Začni žít ten svůj. 🌞</p>
+  </div>
+  <div class="reflection"><h4>🪞 Otázka pro tebe</h4><p>Jak by vypadal jeden obyčejný den, ve kterém by ses cítila víc sama sebou?</p></div>
+  <div class="action"><h4>🌱 Malý krok</h4><p>Vyber jednu drobnost, kterou by do svého dne zařadila žena, kterou se chceš stávat. Udělej ji už dnes.</p></div>
+</article>
+</section>
+
+<footer style="text-align:center;padding:35px 5px 10px">
+  <p style="font-family:Georgia,serif;font-size:22px">Vrať se k sobě. 🤍</p>
+  <p style="font-size:12px;color:#796D7D;margin-top:8px">Nemusíš mít všechno vyřešené, abys mohla začít.</p>
+</footer>
 </main>
 
-<footer>
-  <p>Vzkazy od budoucího já</p>
-  <p>Jana Pernicová · Vytvořeno s láskou ♡</p>
-</footer>
-
 <script>
-const letters = [
-  {
-    title: "Nemusíš všechno zvládnout",
-    symbol: "🌷",
-    teaser: "Dovol si zpomalit",
-    letter: `Milá moje,
-
-píšu ti z místa, kde už se na sebe nedívám jen podle toho, kolik jsem toho za den stihla.
-
-Vím, jak moc ses snažila. Kolikrát jsi pokračovala, i když jsi byla unavená. Kolikrát jsi měla pocit, že když na chvíli zastavíš, všechno se sesype.
-
-Chci ti říct něco, co jsem se sama musela naučit: nemusíš všechno držet vlastníma rukama.
-
-Nemusíš každý den podat skvělý výkon. Nemusíš mít uklizeno, všechno vyřešené a všechny spokojené. Jsi člověk, ne nekonečný zdroj energie.
-
-Začni si všímat, kdy potřebuješ odpočinek, a přestaň ho považovat za něco, co si musíš zasloužit.
-
-Tvůj život se neskládá jen z úkolů, které splníš. Skládá se také z chvil, které opravdu prožiješ.
-
-A já si přeji, abys jich měla víc.
-
-S láskou,`,
-    question: "Co se snažím zvládnout jen proto, že mám pocit, že musím?",
-    action: "Vyber si jednu věc, kterou dnes můžeš odložit, zjednodušit nebo si na ni říct o pomoc."
-  },
-  {
-    title: "Tvoje hodnota zůstává",
-    symbol: "🤍",
-    teaser: "Nemusíš nic dokazovat",
-    letter: `Milá moje,
-
-chci ti připomenout, že tvoje hodnota se nemění podle toho, jak se ti zrovna daří.
-
-Nejsi hodnotnější, když jsi produktivní. Nejsi méně hodnotná, když se ti něco nepovede. A nemusíš si zasloužit lásku tím, že budeš vždycky milá, ochotná a připravená pomáhat.
-
-Vím, že někdy hledáš potvrzení zvenčí. Že přemýšlíš, jestli jsi udělala dost, jestli jsi někoho nezklamala a jestli bys neměla být ještě trochu lepší.
-
-Ale nechci, abys strávila celý život tím, že se budeš snažit zasloužit si právo být sama sebou.
-
-Můžeš růst, aniž bys sama sebe odmítala. Můžeš napravit chybu, aniž by ses za ni trestala. Můžeš být nedokonalá a přesto žít život, na který budeš jednou vzpomínat s láskou.
-
-Nemusíš se stát někým jiným.
-
-Začni se k sobě chovat jako k člověku, na kterém ti záleží.
-
-S láskou,`,
-    question: "V čem si připadám dost dobrá jen tehdy, když podám určitý výkon?",
-    action: "Všimni si jedné věci, kterou na sobě oceňuješ nezávisle na svých výsledcích."
-  },
-  {
-    title: "Můžeš důvěřovat svému hlasu",
-    symbol: "🦋",
-    teaser: "Tvůj názor má místo",
-    letter: `Milá moje,
-
-pamatuješ, kolikrát jsi věděla, co cítíš, a přesto jsi o tom pochybovala?
-
-Kolikrát jsi svůj názor zjemnila, své přání odložila nebo raději mlčela, protože jsi nechtěla vyvolat nespokojenost?
-
-Chci, abys věděla, že se můžeš učit důvěřovat sama sobě.
-
-To neznamená, že se nikdy nespleteš. Znamená to, že můžeš naslouchat svému svědomí, přemýšlet, hledat pravdu a rozhodovat se podle toho, co je pro tebe skutečně důležité.
-
-Nemusíš mít souhlas všech lidí kolem sebe, abys mohla udělat promyšlené rozhodnutí.
-
-Můžeš změnit názor, když získáš nové informace. Můžeš říct, že něco nevíš. Můžeš se zeptat. A můžeš také klidně říct, co potřebuješ.
-
-Tvoje slova nemusí být hlasitá, aby měla váhu.
-
-Začni tím, že přestaneš automaticky zpochybňovat každou vlastní potřebu.
-
-S láskou,`,
-    question: "Co bych si přála říct, kdybych se nebála, že někoho zklamu?",
-    action: "Vyjádři jednu svou potřebu nebo názor klidně, upřímně a bez zbytečného omlouvání."
-  },
-  {
-    title: "Nemusíš znát celou cestu",
-    symbol: "✨",
-    teaser: "Stačí další krok",
-    letter: `Milá moje,
-
-vím, jak moc by sis někdy přála mít jasno. Vědět, jestli se rozhoduješ správně, jestli všechno dobře dopadne a jestli má tvé úsilí smysl.
-
-Jenže život ti málokdy ukáže celou cestu najednou.
-
-Postupně jsem pochopila, že nemusím znát všechny odpovědi, abych mohla udělat jeden dobrý krok.
-
-Mohu se rozhodovat podle svých hodnot. Mohu se modlit, přemýšlet, hledat radu a dát si čas. A pak mohu vykročit, i když ve mně zůstává trochu nejistoty.
-
-Nemusím si plést opatrnost s nekonečným čekáním na jistotu.
-
-A nemusím si plést důvěru s tím, že všechno dopadne přesně podle mých představ.
-
-Někdy se cesta ukáže až ve chvíli, kdy po ní začnu jít.
-
-Dnes se nemusíš rozhodnout o celém svém životě. Stačí se podívat na nejbližší krok.
-
-S láskou,`,
-    question: "Které rozhodnutí odkládám, protože čekám na úplnou jistotu?",
-    action: "Napiš si jeden malý, bezpečný a konkrétní krok, který můžeš udělat ještě dnes."
-  },
-  {
-    title: "Tvoje hranice jsou důležité",
-    symbol: "🌿",
-    teaser: "Laskavost zahrnuje i tebe",
-    letter: `Milá moje,
-
-kdysi jsem si myslela, že být laskavá znamená být vždycky k dispozici.
-
-Že dobrá žena všechno pochopí, všechno vydrží a nebude příliš náročná. Že když někomu řekne ne, ublíží mu.
-
-Dnes vím, že vztahy potřebují nejen lásku, ale také pravdivost a respekt.
-
-Mohu mít někoho ráda a přesto s ním nesouhlasit. Mohu druhému rozumět a přesto nepřevzít odpovědnost za jeho pocity. Mohu nabídnout pomoc, aniž bych se sama dostala na úplný konec svých sil.
-
-Moje hranice nejsou trestem pro ostatní. Jsou způsobem, jak pečuji o své možnosti, potřeby a čas.
-
-Nemusíš všechny přesvědčit, aby tvým hranicím rozuměli. Potřebuješ se je učit vyjadřovat jasně a s respektem.
-
-A někdy budeš muset snést i to, že se to někomu nebude líbit.
-
-To ještě neznamená, že děláš něco špatně.
-
-S láskou,`,
-    question: "Kde dávám druhým víc, než mohu dlouhodobě dávat bez vyčerpání?",
-    action: "Před dalším souhlasem si dopřej chvíli a zeptej se sama sebe, zda opravdu můžeš a chceš."
-  },
-  {
-    title: "Začni znovu, kolikrát potřebuješ",
-    symbol: "🌅",
-    teaser: "Jeden den nic nemaže",
-    letter: `Milá moje,
-
-jsou dny, kdy se ti bude dařit, a dny, kdy se vrátíš ke starým návykům.
-
-Někdy ztratíš motivaci. Někdy budeš unavená. Někdy zjistíš, že cesta, kterou sis vybrala, neodpovídá tomu, co právě potřebuješ.
-
-Prosím, nedělej z jednoho těžkého dne rozsudek nad celým svým životem.
-
-Nemusíš všechno vzdát jen proto, že jsi na chvíli přestala pokračovat. Nemusíš čekat na pondělí, první den měsíce ani na chvíli, kdy budeš mít dokonalé podmínky.
-
-Můžeš se vrátit malým krokem.
-
-A pokud zjistíš, že původní plán nefunguje, můžeš ho změnit. Vytrvalost neznamená nikdy neuhnout. Někdy znamená hledat způsob, který je pro tebe skutečně udržitelný.
-
-Nechci, abys byla dokonalá.
-
-Chci, abys nezapomínala, že se k sobě můžeš vracet s laskavostí.
-
-S láskou,`,
-    question: "Od čeho jsem se vzdálila a ráda bych se k tomu vrátila?",
-    action: "Začni znovu tím nejmenším krokem. Nepotřebuješ dnes dohánět všechno, co se nestalo."
-  },
-  {
-    title: "Dovol si chtít víc",
-    symbol: "⭐",
-    teaser: "Tvoje přání mají místo",
-    letter: `Milá moje,
-
-možná ses už někdy přistihla, že své sny zmenšuješ ještě dřív, než jim dáš šanci.
-
-Říkáš si, že teď není správná doba, že na to nemáš dost zkušeností nebo že bys měla být raději vděčná za to, co máš.
-
-Vděčnost a touha po změně se přitom nevylučují.
-
-Můžeš si vážit toho, co už v životě máš, a zároveň cítit, že chceš něco dalšího. Novou zkušenost, tvořivost, práci, prostor pro sebe nebo jiný způsob života.
-
-Nemusíš hned vědět, jak svého přání dosáhneš. Nemusíš kvůli němu riskovat všechno, co je pro tebe důležité.
-
-Můžeš ho začít zkoumat. Zjišťovat, co by vyžadovalo, co je reálné a jaký první krok je v tvých možnostech.
-
-Nedovol strachu, aby za tebe automaticky rozhodl, že něco není možné.
-
-Dej svému přání alespoň prostor, aby ses mohla skutečně rozhodnout.
-
-S láskou,`,
-    question: "Kterému přání už dlouho nedávám prostor, protože se bojím začít?",
-    action: "Věnuj deset minut tomu, že si zapíšeš, co by první malý krok k tvému přání mohl být."
-  },
-  {
-    title: "Naslouchej svému tělu",
-    symbol: "🌸",
-    teaser: "Tvé tělo není nepřítel",
-    letter: `Milá moje,
-
-chci, abys přestala vnímat své tělo jen jako něco, co musíš opravovat.
-
-Není to projekt, který nikdy nebude hotový. Je to místo, ve kterém prožíváš svůj život.
-
-Tvé tělo se mění. Někdy máš více energie, jindy méně. Někdy potřebuješ pohyb a jindy spánek. A tvoje potřeby se mohou měnit také s věkem a životní situací.
-
-Nemusíš se za každou změnu trestat.
-
-Můžeš o sebe pečovat z úcty, ne z nenávisti. Můžeš si vybírat jídlo, které tě vyživuje, pohyb, který ti dělá dobře, a odpočinek, který potřebuješ.
-
-Péče o sebe nemusí být další náročný úkol na seznamu.
-
-Někdy začíná obyčejnou otázkou: Co právě teď potřebuji?
-
-Zkus své tělo méně hodnotit a více vnímat.
-
-Zaslouží si tvou pozornost nejen tehdy, když něco nefunguje, ale každý den.
-
-S láskou,`,
-    question: "Co mi moje tělo možná říká, když mu konečně dopřeji pozornost?",
-    action: "Na chvíli se zastav a zkontroluj, zda potřebuješ vodu, jídlo, odpočinek, pohyb nebo chvíli ticha."
-  },
-  {
-    title: "Nemusíš se srovnávat",
-    symbol: "🕊️",
-    teaser: "Tvůj život má vlastní tempo",
-    letter: `Milá moje,
-
-vím, jak snadné je podívat se na někoho jiného a začít pochybovat o vlastní cestě.
-
-Někdo už má hotovo. Někdo vydělává víc. Někdo působí jistěji, vypadá spokojeněji nebo zvládá něco, co se tobě právě nedaří.
-
-Ale ty nevidíš celý jeho příběh. A on nevidí celý ten tvůj.
-
-Vaše podmínky, zkušenosti, povinnosti a možnosti se liší.
-
-Můžeš se od druhých inspirovat, aniž by ses kvůli nim zmenšovala. Můžeš se učit, aniž bys sama sebe považovala za pozadu.
-
-Nemusíš stihnout všechno v jednom věku. Nemusíš mít stejnou kariéru, rodinu, životní styl ani cíle jako někdo jiný.
-
-Zkus se místo otázky, proč nejsi tam, kde někdo jiný, zeptat, kam chceš směřovat ty.
-
-To je mnohem užitečnější začátek.
-
-S láskou,`,
-    question: "S kým se srovnávám a co mi toto srovnávání bere?",
-    action: "Všimni si jednoho vlastního pokroku, který bys možná přehlédla, kdybys sledovala jen ostatní."
-  },
-  {
-    title: "Můžeš požádat o pomoc",
-    symbol: "💗",
-    teaser: "Nemusíš na všechno sama",
-    letter: `Milá moje,
-
-dlouho jsem si myslela, že musím všechno zvládnout sama.
-
-Že požádat o pomoc znamená přiznat slabost. Že bych měla vydržet ještě trochu déle, vyřešit ještě jednu věc a teprve potom si dovolit přiznat, že už nemohu.
-
-Jenže člověk není stvořený k tomu, aby nesl úplně všechno sám.
-
-Požádat o pomoc neznamená, že se vzdáváš odpovědnosti. Znamená to, že uznáváš své možnosti a dovoluješ druhým, aby se mohli zapojit.
-
-Nemusíš čekat, až budeš úplně vyčerpaná.
-
-Můžeš říct, že potřebuješ praktickou pomoc. Můžeš někomu svěřit, jak se skutečně cítíš. Můžeš hledat radu, podporu nebo odbornou pomoc, když ji potřebuješ.
-
-A nemusíš se omlouvat za to, že jsi člověk s vlastními limity.
-
-Chci, abys věděla, že také ty můžeš být opečovávaná.
-
-Nemusíš být vždycky tou nejsilnější v místnosti.
-
-Chci, abys věděla, že také ty můžeš být opečovávaná. Nemusíš mít vždycky odpověď, všechno vyřešit ani být oporou pro všechny kolem sebe.
-
-I ty si zasloužíš něčí náruč, pochopení a chvíli, kdy nemusíš vůbec nic.
-
-S láskou,
-tvoje budoucí já`,
-    question: "Komu by sis mohla dovolit říct, že potřebuješ pomoc?",
-    action: "Dnes někomu řekni, co by ti ulehčilo den."
-  },
-  {
-    title: "Vrať se k tomu, co je důležité",
-    letter: `Milá Jani,
-
-jednou pochopíš, že nemusíš stihnout všechno, co od tebe život žádá.
-
-Nemusíš odpovídat na každou zprávu hned. Nemusíš mít dokonale uklizený domov. Nemusíš všem dokazovat, že všechno zvládáš.
-
-Tvůj život se skládá z okamžiků, ve kterých jsi opravdu přítomná.
-
-Vrať se k tomu, na čem ti skutečně záleží.
-
-S láskou,
-tvoje budoucí já`,
-    question: "Čemu chceš ve svém životě věnovat víc pozornosti?",
-    action: "Dnes si dopřej deset minut na něco, co je pro tebe opravdu důležité."
-  },
-  {
-    title: "Ještě může přijít něco krásného",
-    letter: `Milá Jani,
-
-vím, že někdy přemýšlíš, jestli už není pozdě začít znovu.
-
-Chci ti říct jedno: tvůj příběh ještě neskončil.
-
-Nemusíš znát všechny odpovědi. Nemusíš mít dokonalý plán. Stačí, když zůstaneš otevřená malým krokům a novým možnostem.
-
-Dovol si těšit se na to, co ještě neznáš.
-
-S láskou,
-tvoje budoucí já`,
-    question: "Na co se v budoucnosti ještě těšíš?",
-    action: "Napiš si jednu věc, kterou bys chtěla ve svém životě zažít."
+(function(){
+  "use strict";
+
+  const cards = Array.from(document.querySelectorAll(".card"));
+  const letters = Array.from(document.querySelectorAll(".letter"));
+  const progressText = document.getElementById("progress-text");
+  const progressFill = document.getElementById("progress-fill");
+  const progressBar = document.getElementById("progress-bar");
+  const letterArea = document.getElementById("letter-area");
+  const opened = new Set();
+  let current = null;
+
+  function updateProgress(){
+    const count = opened.size;
+    progressText.textContent = count + " z 12 otevřeno";
+    progressFill.style.width = (count / 12 * 100) + "%";
+    progressBar.setAttribute("aria-valuenow", String(count));
   }
-];
 
-const grid = document.getElementById("cards");
-const letterBox = document.getElementById("letterBox");
-const letterTitle = document.getElementById("letterTitle");
-const letterText = document.getElementById("letterText");
-const letterQuestion = document.getElementById("letterQuestion");
-const letterAction = document.getElementById("letterAction");
+  function closeAll(){
+    letters.forEach(letter => letter.classList.remove("active"));
+    cards.forEach(card => {
+      card.classList.remove("is-flipped");
+      card.setAttribute("aria-pressed","false");
+    });
+  }
 
-letters.forEach((item, index) => {
-  const card = document.createElement("button");
-  card.className = "card";
-  card.type = "button";
-  card.innerHTML = `
-    <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
-    <span class="card-label">Vzkaz pro tebe</span>
-    <span class="card-symbol">♡</span>
-  `;
+  cards.forEach(card => {
+    card.setAttribute("aria-pressed","false");
 
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
+    card.addEventListener("click", function(){
+      const index = Number(card.dataset.letter);
 
-    letterTitle.textContent = item.title;
-    letterText.textContent = item.letter;
-    letterQuestion.textContent = item.question;
-    letterAction.textContent = item.action;
+      if(current === index){
+        closeAll();
+        current = null;
+        return;
+      }
 
-    letterBox.hidden = false;
-    letterBox.scrollIntoView({ behavior: "smooth", block: "start" });
+      closeAll();
+      current = index;
+      card.classList.add("is-flipped");
+      card.setAttribute("aria-pressed","true");
+
+      const letter = document.getElementById("letter-" + index);
+      if(!letter) return;
+
+      letter.classList.add("active");
+      opened.add(index);
+      updateProgress();
+
+      window.setTimeout(function(){
+        letterArea.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block:"start"
+        });
+      },150);
+    });
   });
 
-  const grid = document.getElementById("cards");
-const letterBox = document.getElementById("letterBox");
-const letterTitle = document.getElementById("letterTitle");
-const letterText = document.getElementById("letterText");
-const letterQuestion = document.getElementById("letterQuestion");
-const letterAction = document.getElementById("letterAction");
-
-letters.forEach((item, index) => {
-  const card = document.createElement("button");
-  card.className = "card";
-  card.type = "button";
-  card.innerHTML = `
-    <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
-    <span class="card-label">Vzkaz pro tebe</span>
-    <span class="card-symbol">♡</span>
-  `;
-
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-
-    letterTitle.textContent = item.title;
-    letterText.textContent = item.letter;
-    letterQuestion.textContent = item.question;
-    letterAction.textContent = item.action;
-
-    letterBox.hidden = false;
-    letterBox.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-
-  grid.appendChild(card);
-});
-
-document.getElementById("closeLetter").addEventListener("click", () => {
-  letterBox.hidden = true;
-  document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
-});
+  updateProgress();
+})();
 </script>
 </body>
 </html>
 
-  grid.appendChild(card);
-});
 
-document.getElementById("closeLetter").addEventListener("click", () => {
-  letterBox.hidden = true;
-  document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
-});
+
+    
+  
