@@ -1,376 +1,583 @@
-
-<!DOCTYPE html>
-<html lang="cs">
+<!DOCTYPE html><html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#39224f">
-<meta name="description" content="Vyber si kartičku a otevři vzkaz od svého budoucího já.">
-<title>Vzkaz od mého budoucího já</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F9F6F2">
+<meta name="description" content="Nulový bod – 24 zastavení na cestě k sobě. Dopřej si chvíli klidu a vrať se k sobě.">
+<title>Nulový bod – 24 zastavení na cestě k sobě</title>
 <style>
 :root {
-  --purple:#39224f;
-  --violet:#78558b;
-  --lavender:#eee4f4;
-  --pink:#f4dfe7;
-  --gold:#c8a76a;
-  --cream:#fcf8f4;
-  --ink:#403448;
-  --muted:#837689;
+  --mint: #7ECECA;
+  --pink: #F4A7B9;
+  --lilac: #C9A8D4;
+  --cream: #F9F6F2;
+  --dark: #403746;
+  --gold: #C6A15B;
 }
-* {box-sizing:border-box}
+* { box-sizing: border-box; }
 body {
-  margin:0;
-  background:var(--cream);
-  color:var(--ink);
-  font-family:Arial,sans-serif;
-  line-height:1.7;
+  margin: 0;
+  font-family: "Nunito", "Lato", Arial, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.6;
 }
-button {font:inherit;cursor:pointer}
-button:focus-visible {outline:3px solid var(--gold);outline-offset:3px}
-.hero {
-  text-align:center;
-  padding:45px 20px 35px;
-  color:white;
-  background:radial-gradient(ellipse at top,#78588c,#30203f);
+header {
+  padding: 36px 20px 24px;
+  text-align: center;
+  background: linear-gradient(145deg, #f7e5ec, #eee4f4, #e0f3ef);
 }
-.eyebrow {
-  color:#ecd6a6;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
+h1 {
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  margin: 0 0 8px;
+  letter-spacing: 1px;
 }
-h1,h2,h3 {font-family:Georgia,serif;font-weight:normal;line-height:1.3}
-h1 {font-size:clamp(32px,8vw,46px);margin:18px auto}
-.hero p {max-width:340px;margin:auto;color:#f0e6f2;font-size:14px}
-main {max-width:650px;margin:auto;padding:32px 17px 50px}
-.center {text-align:center}
-h2 {font-size:26px;margin:0 0 8px}
-.muted {color:var(--muted);font-size:14px}
-.eyebrow-dark {color:var(--violet);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px}
-.topics {display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:20px 0 25px}
-.topic {border:1px solid #dfd0e5;background:white;color:var(--ink);border-radius:30px;padding:8px 12px;font-size:13px}
-.topic.active {background:var(--purple);color:white;border-color:var(--purple)}
-.choices {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:25px 0 20px}
-.card {border:0;background:transparent;padding:0;min-width:0;border-radius:15px}
+.subtitle {
+  max-width: 520px;
+  margin: auto;
+  font-size: 1.05rem;
+}
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 24px 16px 50px;
+}
+.intro {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 28px;
+}
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 28px;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+.filter {
+  border: 1px solid #d8c9d9;
+  background: white;
+  border-radius: 24px;
+  padding: 9px 15px;
+  color: var(--dark);
+}
+.filter.active {
+  background: var(--dark);
+  color: white;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 14px;
+}
+.card {
+  min-height: 205px;
+  perspective: 1000px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--dark);
+  text-align: center;
+}
 .card-inner {
-  min-height:175px;border-radius:15px;padding:12px 5px;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  color:white;border:1px solid var(--gold);outline:1px solid #f2dfb6;outline-offset:-6px;
-  background:radial-gradient(circle at 50% 40%,#86689a,#40274f 78%);
-  box-shadow:0 7px 17px #3b26401c;transition:transform .25s;
+  position: relative;
+  width: 100%;
+  height: 205px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s ease;
 }
-.card:nth-child(2) .card-inner {background:radial-gradient(circle at 50% 40%,#b17d9b,#603a66 78%)}
-.card:nth-child(3) .card-inner {background:radial-gradient(circle at 50% 40%,#7f7ca9,#3a365e 78%)}
-.card:hover .card-inner {transform:translateY(-4px)}
-.card-symbol {color:#f4dfb2;font-size:36px;margin-bottom:10px;line-height:1.3}
-.card-label {font-family:Georgia,serif;font-size:14px;line-height:1.3}
-.card-hint {font-size:10px;color:#eddfef;margin-top:9px}
-.panel {background:white;border:1px solid #e8dce9;border-radius:19px;padding:23px 20px;margin-top:22px;box-shadow:0 8px 28px #49324d08}
-.hidden {display:none!important}
-.tag {display:inline-block;color:var(--violet);background:var(--lavender);border-radius:30px;padding:4px 12px;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
-.letter {font-family:Georgia,serif;font-size:17px;line-height:1.85;white-space:pre-line}
-.signature {color:var(--violet);font-family:Georgia,serif;font-style:italic;text-align:right;margin-top:14px}
-.question {background:#f8f0f5;border-left:3px solid var(--gold);padding:14px 16px;margin-top:22px;border-radius:0 12px 12px 0}
-.question strong,.action strong {display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px}
-.question strong {color:var(--violet)}
-.action {background:#f2f0e8;padding:14px 16px;border-radius:12px;margin-top:12px}
-.action strong {color:#75603c}
-.btn {display:block;width:100%;border:0;border-radius:30px;background:var(--purple);color:white;padding:13px 17px;margin-top:13px}
-.btn.secondary {background:#eee5f2;color:var(--purple)}
-.btn.outline {background:transparent;color:var(--purple);border:1px solid #d8c6df}
-.divider {width:55px;height:1px;background:var(--gold);margin:23px auto}
-.section {margin-top:38px}
-footer {text-align:center;padding:25px 18px 32px;background:#f3eaf3;color:var(--muted);font-size:12px}
-@media(max-width:390px) {
-  .choices {gap:8px}
-  .card-inner {min-height:150px}
-  .card-symbol {font-size:30px}
-  .card-label {font-size:12px}
-  .card-hint {font-size:9px}
-  .panel {padding:19px 15px}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
 }
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {transition:none!important}
+.card-front, .card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 12px;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 5px 18px #55435c12;
+}
+.card-front {
+  background: linear-gradient(145deg, white, #f7e9f0);
+  border: 1px solid #ead8e5;
+}
+.card-back {
+  background: linear-gradient(145deg, #e1f3ef, #eee4f4);
+  transform: rotateY(180deg);
+  border: 1px solid #d7d6e4;
+}
+.card-number {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: #8e7896;
+}
+.card-symbol {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+.card-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.card-back p {
+  font-size: 0.92rem;
+  margin: 8px 0 0;
+}
+.result {
+  display: none;
+  margin-top: 28px;
+  padding: 24px;
+  background: white;
+  border-radius: 22px;
+  border: 1px solid #eadde9;
+  box-shadow: 0 8px 25px #55435c10;
+}
+.result.visible { display: block; }
+.result h2 { margin-top: 0; }
+.reflection {
+  padding: 16px;
+  background: #f7edf3;
+  border-radius: 14px;
+  margin-top: 16px;
+}
+.action {
+  padding: 16px;
+  background: #edf7f4;
+  border-radius: 14px;
+  margin-top: 12px;
+}
+.primary {
+  display: inline-block;
+  border: 0;
+  border-radius: 25px;
+  background: var(--dark);
+  color: white;
+  padding: 12px 20px;
+  margin: 8px 6px 0 0;
+}
+.secondary {
+  display: inline-block;
+  border: 1px solid #d8c9d9;
+  border-radius: 25px;
+  background: white;
+  color: var(--dark);
+  padding: 11px 18px;
+  margin: 8px 6px 0 0;
+}
+footer {
+  text-align: center;
+  padding: 24px 16px 35px;
+  color: #7c6c80;
+  font-size: 0.9rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-inner { transition: none; }
 }
 </style>
 </head>
 <body>
-<header class="hero">
-  <div class="eyebrow">Chvíle jen pro tebe</div>
-  <h1>Vzkaz od mého<br>budoucího já</h1>
-  <p>Na chvíli se zastav. Ztiš svět kolem sebe a dopřej si prostor uslyšet vlastní hlas.</p>
+<header>
+  <h1>Vzkazy od budoucího já</h1>
+  <p class="subtitle">24 zastavení na cestě k sobě</p>
 </header>
 
 <main>
-  <section class="center">
-    <div class="eyebrow-dark">Tvůj dnešní okamžik</div>
-    <h2>Co dnes potřebuješ?</h2>
-    <p class="muted">Nemusíš znát odpověď. Vyber si to, co tě právě přitahuje.</p>
+  <section class="intro">
+    <h2>Na chvíli se zastav.</h2>
+    <p>
+      Nemusíš mít všechny odpovědi. Nemusíš nic dokazovat.
+      Dopřej si chvíli ticha a vyber si kartu, která tě dnes přitahuje.
+      Ber její vzkaz jako laskavé připomenutí od tvého budoucího já, ne jako předpověď budoucnosti.
+    </p>
+    <p><strong>Vyber si jednu kartu a otoč ji.</strong></p>
   </section>
 
-  <div class="topics" id="topics">
-    <button class="topic active" data-topic="vse">Nechám se vést</button>
-    <button class="topic" data-topic="odvaha">Odvaha</button>
-    <button class="topic" data-topic="vztahy">Vztahy</button>
-    <button class="topic" data-topic="hodnota">Moje hodnota</button>
-    <button class="topic" data-topic="klid">Klid</button>
-    <button class="topic" data-topic="novy">Nový začátek</button>
-    <button class="topic" data-topic="vira">Víra a naděje</button>
+  <div class="filters" aria-label="Výběr tématu">
+    <button class="filter active" data-filter="vse">Všechny karty</button>
+    <button class="filter" data-filter="klid">Klid</button>
+    <button class="filter" data-filter="odvaha">Odvaha</button>
+    <button class="filter" data-filter="duvera">Důvěra</button>
+    <button class="filter" data-filter="zmena">Změna</button>
   </div>
 
-  <section class="choices" id="cards" aria-label="Vyber si kartičku">
-    <button class="card" data-card="0" aria-label="První kartička">
-      <span class="card-inner"><span class="card-symbol">✧</span><span class="card-label">První vzkaz</span><span class="card-hint">Otočit kartičku</span></span>
-    </button>
-    <button class="card" data-card="1" aria-label="Druhá kartička">
-      <span class="card-inner"><span class="card-symbol">☾</span><span class="card-label">Druhý vzkaz</span><span class="card-hint">Otočit kartičku</span></span>
-    </button>
-    <button class="card" data-card="2" aria-label="Třetí kartička">
-      <span class="card-inner"><span class="card-symbol">✺</span><span class="card-label">Třetí vzkaz</span><span class="card-hint">Otočit kartičku</span></span>
-    </button>
-  </section>
+  <section class="grid" id="cardGrid" aria-label="Vzkazy od budoucího já"></section>
 
-  <p class="muted center" id="hint">Vyber si jednu ze tří kartiček. Každá skrývá jiný vzkaz.</p>
+  <section class="result" id="result" aria-live="polite">
+    <h2 id="resultTitle"></h2>
+    <p id="resultMessage"></p>
 
-  <section id="result" class="panel hidden" aria-live="polite">
-    <div class="center">
-      <div class="tag" id="resultTag">Vzkaz pro dnešek</div>
-      <h2 id="resultTitle">Milá moje…</h2>
-    </div>
-    <p class="letter" id="resultLetter"></p>
-    <div class="signature">S láskou, tvoje budoucí já</div>
-    <div class="question"><strong>Otázka pro tebe</strong><div id="resultQuestion"></div></div>
-    <div class="action"><strong>Tvůj malý krok</strong><div id="resultAction"></div></div>
-    <button class="btn" id="longLetterBtn">Otevřít celý dopis 💌</button>
-    <button class="btn secondary" id="copyBtn">Zkopírovat můj vzkaz</button>
-    <button class="btn outline" id="againBtn">Vybrat jinou kartičku</button>
-    <p class="muted center" id="copyStatus" role="status"></p>
-  </section>
+<div class="reflection">
+  <strong>Otázka pro tebe</strong>
+  <p id="resultQuestion"></p>
+</div>
 
-  <section id="longLetter" class="panel hidden" aria-live="polite">
-    <div class="center">
-      <div class="eyebrow-dark">Dopis z budoucnosti</div>
-      <h2 id="longTitle">Drahá moje,</h2>
-    </div>
-    <p class="letter" id="longText"></p>
-    <div class="signature">Tvoje budoucí já 🤍</div>
-    <button class="btn secondary" id="closeLetterBtn">Vrátit se ke kartičce</button>
-  </section>
+<div class="action">
+  <strong>Malý krok pro dnešek</strong>
+  <p id="resultAction"></p>
+</div>
 
-  <section class="section center">
-    <div class="divider"></div>
-    <h2>Nemusíš změnit celý život.</h2>
-    <p class="muted">Někdy stačí jeden upřímný okamžik. Jedno rozhodnutí. Jeden malý krok směrem k sobě.</p>
-    <p class="muted">Tyhle kartičky ti nepředpovídají budoucnost. Nabízejí ti prostor podívat se na svůj život z nového úhlu.</p>
+<button class="primary" id="copyButton">Zkopírovat můj vzkaz</button>
+<button class="secondary" id="newCardButton">Vybrat jiný vzkaz</button>
+<p id="copyStatus" role="status"></p>
+
   </section>
 </main>
 
 <footer>
-  <div style="font-size:20px;color:#b47a9c">✧</div>
-  <p>Vrať se k sobě. Po svém a vlastním tempem.</p>
-  <p>Vytvořeno s láskou ♥</p>
+  <p>Nemusíš změnit celý svůj život za jeden den. Stačí se na chvíli vrátit k sobě.</p>
+  <p>Jana Pernicová · Vytvořeno s láskou ♥</p>
 </footer>
-
 <script>
 const messages = [
-{
-topic:"klid", tag:"Laskavost k sobě", title:"Nemusíš všechno zvládnout",
-short:"Milá moje, nemusíš dnes všechno vyřešit. Nemusíš mít jasno v každém kroku. Zkus se k sobě chovat tak laskavě, jako se celý život snažíš chovat k lidem, které miluješ. Odpočinek není odměna za výkon. Je to součást života.",
-question:"Co by se dnes změnilo, kdybych na sebe nemusela tolik tlačit?",
-action:"Dopřej si deset minut bez povinností. Bez vysvětlování a bez výčitek.",
-long:"Milá moje,\n\nVím, kolikrát ses snažila být oporou pro všechny kolem sebe. Kolikrát jsi pokračovala, i když už jsi potřebovala zastavit. A kolikrát sis řekla, že odpočívat budeš, až bude všechno hotové.\n\nJenže život se nikdy úplně nevyprázdní od povinností. Vždycky bude něco, co čeká na tvoji pozornost. A ty jsi také součástí svého života.\n\nNemusíš si zasloužit odpočinek tím, že se vyčerpáš. Nemusíš být pořád silná. Dnes můžeš udělat méně a přesto být dost.\n\nZačni jednou drobností. Všimni si, co právě potřebuješ, a dovol si na to odpovědět.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"odvaha", tag:"Odvaha", title:"Už nemusíš čekat na dokonalou chvíli",
-short:"Milá moje, odvaha nepřichází vždycky jako velká jistota. Někdy je to tichý okamžik, kdy se rozhodneš udělat první krok, přestože ještě nevíš, jak dopadne. Nemusíš znát celou cestu. Stačí, že přestaneš předstírat, že žádnou cestu nechceš.",
-question:"Který krok bych udělala, kdybych se nemusela bát, že nebude dokonalý?",
-action:"Udělej dnes jeden malý krok, který už dlouho odkládáš.",
-long:"Milá moje,\n\nVzpomínám si, kolikrát jsi čekala na chvíli, kdy budeš připravená. Až budeš mít víc času. Až si budeš jistější. Až bude všechno kolem tebe klidnější.\n\nPříprava má své místo. Ale někdy se za ní schovává strach z toho, co by se mohlo změnit.\n\nNemusíš být beze strachu. Nemusíš nikomu dokazovat, že máš všechno promyšlené. Smíš se učit cestou, měnit názor a začínat znovu.\n\nTvoje budoucnost nevznikne jedním obrovským rozhodnutím. Vzniká také drobnými kroky, které dnes vypadají skoro bezvýznamně.\n\nVyber si jeden. A dovol si začít.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"hodnota", tag:"Vlastní hodnota", title:"Nemusíš si zasloužit své místo",
-short:"Milá moje, tvoje hodnota se nemění podle toho, kolik toho zvládneš, komu vyhovíš nebo kolik lidí tě pochválí. Nemusíš být dokonalejší, abys směla chtít hezký život. Už teď máš právo hledat, co ti dává smysl.",
-question:"Kdy naposledy jsem udělala něco jen proto, že jsem to opravdu chtěla?",
-action:"Vyber si dnes jednu malou věc podle sebe, ne podle očekávání ostatních.",
-long:"Milá moje,\n\nDlouho ses mohla učit, že být hodná znamená vyhovět. Že být silná znamená vydržet. Že být dobrá znamená nezklamat.\n\nAle nemusíš být pořád dostupná, výkonná ani bezchybná, abys byla člověkem, který si zaslouží lásku a respekt.\n\nMůžeš někoho milovat a přitom s ním nesouhlasit. Můžeš být vděčná za svůj život a přitom toužit po změně. Můžeš druhým pomáhat a přitom nezapomínat na sebe.\n\nTvoje potřeby nejsou automaticky méně důležité jen proto, že je někdo jiný vyslovil hlasitěji.\n\nDnes se zeptej sama sebe, co potřebuješ ty.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"vztahy", tag:"Vztahy a hranice", title:"Láska nemusí znamenat zapomenout na sebe",
-short:"Milá moje, můžeš mít ráda druhé a zároveň říct, co už je na tebe příliš. Hranice nejsou trest. Jsou způsob, jak zůstat ve vztahu přítomná, aniž bys musela opustit sama sebe.",
-question:"Kde říkám ano, i když uvnitř cítím ne?",
-action:"Zkus dnes jednu klidnou a pravdivou větu místo automatického souhlasu.",
-long:"Milá moje,\n\nVím, jak moc ti záleží na lidech, které miluješ. Jak tě může trápit představa, že někoho zklameš nebo že se na tebe bude zlobit.\n\nAle vztah nemusí stát na tom, že jeden člověk pořád ustupuje. Blízkost potřebuje prostor pro oba. Také pro tvoje pocity, potřeby a limity.\n\nNemusíš všechno vysvětlit dokonale. Nemusíš se omlouvat za každou hranici. A nemusíš rozhodnout o celém vztahu jen proto, že dnes potřebuješ říct ne.\n\nZačni malou pravdivostí. Mluv klidně, jasně a s respektem k sobě i druhému.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"novy", tag:"Nový začátek", title:"Smíš začít znovu",
-short:"Milá moje, nemusíš čekat na pondělí, nový rok ani na chvíli, kdy bude všechno připravené. Nový začátek někdy vypadá jako obyčejné rozhodnutí udělat dnes jednu věc jinak. I po těžkém období může přijít další kapitola.",
-question:"Co už nechci dál dělat jen ze zvyku?",
-action:"Vyber jednu drobnost, kterou chceš do svého dne přidat nebo z něj ubrat.",
-long:"Milá moje,\n\nNe každý začátek vypadá jako nový život. Někdy se okolnosti nezmění přes noc. Některé povinnosti zůstávají a některé otázky potřebují čas.\n\nPřesto můžeš začít jinak zacházet sama se sebou. Můžeš si všimnout starého vzorce a zkusit novou odpověď. Můžeš si přiznat, že už něco nechceš, a ještě nemusíš vědět, co přesně přijde místo toho.\n\nNemusíš vymazat minulost, abys mohla změnit směr. To, co ses naučila, si můžeš vzít s sebou, aniž bys musela opakovat všechno, co tě vyčerpávalo.\n\nDnes je dost dobrý den na první malý krok.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"vira", tag:"Víra a naděje", title:"Nemusíš vidět celou cestu",
-short:"Milá moje, někdy nevidíš, co bude dál. To ještě neznamená, že musíš všechno rozhodnout právě teď. Můžeš se na chvíli ztišit, modlit se a udělat další dobrý krok podle toho, co dnes víš.",
-question:"Co bych mohla odevzdat Bohu místo toho, abych to stále dokola nesla sama?",
-action:"Najdi si chvíli ticha. V modlitbě pojmenuj, co tě tíží, a popros o moudrost pro další krok.",
-long:"Milá moje,\n\nJsou chvíle, kdy bychom si přály znát odpovědi předem. Chtěly bychom vědět, zda jsme se rozhodly správně, co nás čeká a jestli všechno dobře dopadne.\n\nVíra ale nemusí znamenat, že znáš každý další krok. Někdy znamená, že přiznáš svou nejistotu a přesto hledáš, co je dobré, pravdivé a laskavé právě teď.\n\nMůžeš se modlit i tehdy, když nemáš správná slova. Můžeš hledat radu. Můžeš si dopřát čas. A nemusíš každou náhodu chápat jako pokyn, který za tebe rozhodne.\n\nPopros Boha o moudrost a pokoj. Potom se podívej na to, co skutečně víš, a vyber nejbližší rozumný krok.\n\nNemusíš dnes dojít do cíle.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"odvaha", tag:"Pravda k sobě", title:"Kolikrát ještě odložíš sebe?",
-short:"Milá moje, jak dlouho ještě budeš čekat, až budou všichni ostatní spokojení? Vím, že nechceš nikoho zklamat. Ale také ty žiješ svůj život. Tvoje přání si zaslouží, abys je alespoň vyslechla.",
-question:"Co ve svém životě odsouvám tak dlouho, až jsem přestala věřit, že to může být jinak?",
-action:"Napiš si jedno přání, které sis dlouho nedovolila říct nahlas.",
-long:"Milá moje,\n\nVím, že máš své důvody, proč některé věci odkládáš. Ne všechno jde změnit hned. Máš závazky, vztahy a skutečný život, který se nedá jednoduše vypnout.\n\nAle chci tě požádat o jednu věc: nepřesvědčuj samu sebe, že na tvých přáních nezáleží, jen proto, že se jejich uskutečnění zdá složité.\n\nMožná dnes nemůžeš udělat velkou změnu. Můžeš si ale přestat nalhávat, že nic nechceš. Můžeš začít hledat možnosti. Můžeš se poradit, plánovat a zkoumat, co je reálné.\n\nNe každé přání se musí splnit přesně tak, jak sis představovala. Ale zaslouží si, abys ho brala vážně.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"klid", tag:"Důvěra", title:"Nemusíš mít odpověď hned",
-short:"Milá moje, nejistota je nepříjemná, ale nemusí tě nutit k okamžitému rozhodnutí. Některé věci se vyjasní až časem. Dnes smíš jen pozorovat, naslouchat sobě a dopřát si chvíli bez hledání definitivní odpovědi.",
-question:"Kterou otázku se snažím vyřešit příliš rychle?",
-action:"Odlož jednu neurgentní otázku na zítřek a dnes si dovol odpočinout.",
-long:"Milá moje,\n\nKdyž na něčem záleží, je snadné vracet se k tomu v myšlenkách znovu a znovu. Hledat znamení, ujištění nebo jistotu, která by odstranila všechny pochybnosti.\n\nJenže ne každá otázka má okamžitou odpověď. A ne každé rozhodnutí musíš udělat ve chvíli, kdy jsi unavená nebo vystrašená.\n\nMůžeš si dát čas na informace, rozhovor i klidnější pohled. Můžeš si přiznat, co nevíš. To není slabost, ale poctivost.\n\nTeď nemusíš vyřešit všechno. Stačí poznat, co je opravdu naléhavé a co může chvíli počkat.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"vztahy", tag:"Odpuštění sobě", title:"Nemusíš se trestat za minulost",
-short:"Milá moje, tehdy jsi rozhodovala s tím, co jsi věděla a co jsi dokázala unést. Můžeš uznat své chyby a poučit se z nich, aniž bys sama sobě navždy odpírala nový začátek.",
-question:"Co bych řekla ženě, kterou miluji, kdyby udělala stejnou chybu jako já?",
-action:"Napiš si jednu větu, kterou bys dnes potřebovala slyšet místo výčitek.",
-long:"Milá moje,\n\nNěkteré vzpomínky se vracejí s otázkou, co by bylo, kdybys tehdy jednala jinak. Dnes už máš možná zkušenosti, které jsi tehdy neměla. Možná vidíš věci, které tehdy zůstávaly skryté.\n\nMůžeš převzít odpovědnost za své činy. Můžeš napravit, co napravit jde. Můžeš se omluvit a poučit se.\n\nAle nekonečné trestání sebe sama minulost nezmění. Jen ti bere sílu, kterou potřebuješ pro dnešek.\n\nNemusíš tvrdit, že všechno bylo v pořádku. Můžeš přijmout, že jsi člověk, který se učí. A že i ty si zasloužíš růst.\n\nS láskou, tvoje budoucí já."
-},
-{
-topic:"hodnota", tag:"Tvoje vlastní cesta", title:"Nemusíš se s nikým srovnávat",
-short:"Milá moje, cizí tempo není měřítkem tvého života. Nevidíš všechny okolnosti, které stojí za cestou druhých lidí. Nemusíš být tam, kde jsou oni. Potřebuješ najít další krok, který dává smysl tobě.",
-question:"Podle koho měřím svůj úspěch a je to opravdu moje měřítko?",
-action:"Na dnešek si dej pauzu od jednoho srovnávání, které ti bere radost.",
-long:"Milá moje,\n\nJe snadné dívat se na ostatní a mít pocit, že už měli být dál. Že něco nestíháš, že jsi měla něco udělat dřív nebo že ostatní vědí, jak na to.\n\nAle každý člověk žije v jiných podmínkách. Má jinou podporu, jiné zkušenosti, jiné starosti i možnosti.\n\nNemusíš zmenšovat své sny. Nemusíš se vzdát růstu. Jen si dovol měřit pokrok také podle toho, co je pro tebe skutečně důležité.\n\nMožná je tvým dnešním úspěchem odpočinek. Možná rozhovor, který jsi dlouho odkládala. Možná malý krok k něčemu novému.\n\nTvůj život není závod s cizími lidmi.\n\nS láskou, tvoje budoucí já."
-}
+  {
+    title: "Dovol si zpomalit",
+    category: "klid",
+    symbol: "🌿",
+    message: "Ahoj, to jsem já. Tvoje budoucí já. Chci ti připomenout, že nemusíš všechno zvládnout právě teď. Život ti neuteče, když se na chvíli zastavíš. Učíš se odpočívat bez pocitu viny a zjišťuješ, že i v klidu se věci mohou posouvat správným směrem.",
+    question: "Kde na sebe dnes zbytečně tlačím?",
+    action: "Dopřej si pět minut bez telefonu, úkolů a očekávání."
+  },
+  {
+    title: "Věř svému hlasu",
+    category: "odvaha",
+    symbol: "🦋",
+    message: "Už nemusíš čekat, až ti někdo potvrdí, že smíš jít vlastní cestou. Tvůj hlas má hodnotu. Tvoje potřeby mají hodnotu. A můžeš se rozhodovat s respektem k sobě i k ostatním.",
+    question: "Co bych dnes řekla, kdybych se nebála reakce druhých?",
+    action: "Vyjádři jednu svou potřebu klidně a srozumitelně."
+  },
+  {
+    title: "Nemusíš znát celou cestu",
+    category: "duvera",
+    symbol: "✨",
+    message: "Nemusíš mít plán na dalších deset let. Někdy stačí světlo na jeden jediný krok. Učím se důvěřovat tomu, že nemusím znát všechny odpovědi, abych mohla udělat něco dobrého dnes.",
+    question: "Jaký malý krok už teď znám, ale stále ho odkládám?",
+    action: "Udělej první krok. Nemusíš dnes dokončit všechno."
+  },
+  {
+    title: "Změna začíná uvnitř",
+    category: "zmena",
+    symbol: "🌱",
+    message: "Nemusíš se stát někým jiným, abys mohla žít jinak. Změna může začít tím, že se k sobě přestaneš chovat jako k nepříteli. Můžeš růst, aniž bys popírala, kým jsi byla.",
+    question: "Jakou změnu si přeji a co mi v ní brání?",
+    action: "Vyber jednu drobnou věc, kterou dnes uděláš jinak."
+  },
+  {
+    title: "Tvoje hodnota se neměří výkonem",
+    category: "klid",
+    symbol: "🤍",
+    message: "Jsi hodnotná i ve dnech, kdy nemáš energii. I když není uklizeno. I když se ti něco nepovede. Nemusíš si zasloužit právo na odpočinek tím, že nejdřív všechno dokončíš.",
+    question: "Co bych si dovolila, kdybych nemusela nic dokazovat?",
+    action: "Dnes jednu věc vědomě nech na později."
+  },
+  {
+    title: "Odvaha nemusí být hlasitá",
+    category: "odvaha",
+    symbol: "🔥",
+    message: "Odvaha někdy znamená vykročit. Jindy zůstat stát. Někdy říct ano a jindy konečně říct ne. Nemusíš být bez strachu. Stačí, když strach nebude rozhodovat úplně za tebe.",
+    question: "Kde potřebuji udělat odvážné rozhodnutí?",
+    action: "Udělej jeden malý krok směrem k tomu, na čem ti záleží."
+  },
+  {
+    title: "Důvěřuj procesu",
+    category: "duvera",
+    symbol: "🌷",
+    message: "Ne všechno roste viditelně. I když dnes nevidíš výsledek, můžeš se učit, dozrávat a měnit své návyky. Nemusíš každý den dokazovat, že se posouváš. Některé změny potřebují čas.",
+    question: "Kde na sebe tlačím, abych už měla výsledek?",
+    action: "Připomeň si jednu věc, kterou už zvládáš lépe než dřív."
+  },
+  {
+    title: "Dovol si začít znovu",
+    category: "zmena",
+    symbol: "🌅",
+    message: "Jeden těžký den nevymaže všechno dobré, co jsi udělala. Nemusíš čekat na pondělí, nový měsíc ani nový rok. Každá chvíle může být malým začátkem.",
+    question: "K čemu se chci vrátit, i když jsem od toho odbočila?",
+    action: "Vrať se k jedné drobnosti, která ti dělá dobře."
+  },
+  {
+    title: "Naslouchej svému tělu",
+    category: "klid",
+    symbol: "🌼",
+    message: "Tvoje tělo není projekt, který musíš neustále opravovat. Je to domov, ve kterém žiješ. Zaslouží si jídlo, odpočinek, pohyb i laskavost. Nemusíš se sebou bojovat, abys o sebe mohla pečovat.",
+    question: "Co mi moje tělo právě teď potřebuje říct?",
+    action: "Zastav se a všimni si, jestli potřebuješ vodu, jídlo, pohyb nebo odpočinek."
+  },
+  {
+    title: "Nemusíš všem vyhovět",
+    category: "odvaha",
+    symbol: "🕊️",
+    message: "Postupně zjišťuješ, že láska a laskavost neznamenají říkat na všechno ano. Můžeš mít druhé ráda a současně chránit svůj čas, energii a hranice.",
+    question: "Kde říkám ano, přestože uvnitř cítím ne?",
+    action: "Než na něco přistoupíš, dopřej si čas na rozmyšlenou."
+  },
+  {
+    title: "Nemusíš všechno kontrolovat",
+    category: "duvera",
+    symbol: "☁️",
+    message: "Můžeš dělat to nejlepší, co je v tvých silách, a přesto nemít pod kontrolou všechny výsledky. To není selhání. Je to součást života. Učím se rozlišovat mezi tím, co mohu ovlivnit, a tím, co už musím nechat být.",
+    question: "Co se snažím řídit, přestože to není v mé moci?",
+    action: "Sepiš si jednu věc, kterou můžeš ovlivnit, a jednu, kterou dnes pouštíš."
+  },
+  {
+    title: "Tvoje minulost není rozsudek",
+    category: "zmena",
+    symbol: "🦋",
+    message: "To, co se ti stalo, je součástí tvého příběhu. Nemusí to ale určovat každou další kapitolu. Můžeš se učit nové způsoby, jak přemýšlet, rozhodovat se a zacházet sama se sebou.",
+    question: "Jaké staré přesvědčení už mi neslouží?",
+    action: "Zkus si místo něj napsat laskavější a realističtější větu."
+  },
+  {
+    title: "Dovol si přijímat",
+    category: "klid",
+    symbol: "💗",
+    message: "Nemusíš být vždycky ta, která všechno zařídí a všem pomůže. I ty můžeš požádat o pomoc. I ty můžeš přijmout péči. Nemusíš si ji zasloužit tím, že se nejdřív vyčerpáš.",
+    question: "S čím bych dnes mohla požádat o pomoc?",
+    action: "Požádej někoho o jednu konkrétní drobnost."
+  },
+  {
+    title: "Tvůj sen má právo existovat",
+    category: "odvaha",
+    symbol: "⭐",
+    message: "Nemusíš mít jistotu, že všechno vyjde, abys mohla začít. Tvoje přání si zaslouží pozornost. Nemusíš ho hned proměnit ve velký plán. Můžeš mu dát prostor a postupně zjistit, kam tě povede.",
+    question: "Kterému svému přání už dlouho nedávám prostor?",
+    action: "Věnuj svému snu deset minut konkrétní pozornosti."
+  },
+  {
+    title: "I malé kroky se počítají",
+    category: "zmena",
+    symbol: "🌱",
+    message: "Nemusíš všechno změnit najednou. Právě malé kroky, ke kterým se vracíš, mohou postupně vytvořit nový způsob života. Neměř svůj pokrok jen tím, co už máš hotové.",
+    question: "Jaký malý návyk by mi dlouhodobě pomohl?",
+    action: "Vyber si krok tak malý, že ho zvládneš i v obyčejný náročný den."
+  },
+  {
+    title: "Důvěra roste postupně",
+    category: "duvera",
+    symbol: "🌙",
+    message: "Nemusíš si důvěřovat ve všem a okamžitě. Důvěra v sebe roste také tehdy, když si všimneš vlastních potřeb, dodržíš drobný slib sama sobě nebo uznáš, že něco nevíš.",
+    question: "Co by mi pomohlo cítit se ve vlastních rozhodnutích jistěji?",
+    action: "Dodrž dnes jeden malý slib, který dáš sama sobě."
+  },
+  {
+    title: "Odpočinek není odměna",
+    category: "klid",
+    symbol: "☕",
+    message: "Odpočinek není něco, co si musíš vysloužit vyčerpáním. Je to přirozená součást života. Nemusíš čekat, až bude všechno hotové, protože všechno hotové možná nebude nikdy.",
+    question: "Co mi brání odpočívat bez výčitek?",
+    action: "Naplánuj si krátkou pauzu a dovol si ji skutečně využít."
+  },
+  {
+    title: "Nemusíš se srovnávat",
+    category: "odvaha",
+    symbol: "🌸",
+    message: "Cizí cesta ti nemusí sloužit jako měřítko té vlastní. Každý člověk má jiné podmínky, možnosti i příběh. Můžeš se inspirovat druhými, aniž bys kvůli tomu zpochybňovala sebe.",
+    question: "S kým se srovnávám a co mi to bere?",
+    action: "Dnes si všimni jednoho vlastního pokroku, i kdyby byl malý."
+  },
+  {
+    title: "Nech prostor novému",
+    category: "zmena",
+    symbol: "🍃",
+    message: "Když se něco mění, nemusíš mít hned jasno, co přijde dál. Někdy potřebuješ chvíli, abys pochopila, co už nechceš nést a čemu chceš dát místo.",
+    question: "Co už ve svém životě nechci dál udržovat?",
+    action: "Uvolni trochu prostoru – ve svém dni, doma nebo ve svých myšlenkách."
+  },
+  {
+    title: "Vrať se k tomu podstatnému",
+    category: "duvera",
+    symbol: "🕯️",
+    message: "Uprostřed všech povinností můžeš znovu hledat to, na čem ti opravdu záleží. Pro mě je důležité žít s láskou, pravdivostí a vírou. Nemusím mít dokonalý den, abych se mohla vrátit k tomu, co mě vede.",
+    question: "Co je pro mě v této životní etapě skutečně důležité?",
+    action: "Věnuj chvíli modlitbě, tichu nebo tomu, co ti pomáhá znovu najít směr."
+  },
+  {
+    title: "Můžeš změnit názor",
+    category: "odvaha",
+    symbol: "🦋",
+    message: "To, že jsi něco chtěla dřív, neznamená, že u toho musíš zůstat navždy. Můžeš získat nové informace, dozrát a rozhodnout se jinak. Změna názoru nemusí být slabost. Může to být známka toho, že vnímáš svůj život pozorněji.",
+    question: "V čem pokračuji jen proto, že jsem se tak rozhodla kdysi?",
+    action: "Dovol si jednu věc znovu promyslet bez okamžitého závazku."
+  },
+  {
+    title: "Buď na své straně",
+    category: "klid",
+    symbol: "🤍",
+    message: "Představ si, že se k sobě začneš chovat jako k někomu, koho máš opravdu ráda. Neznamená to, že přestaneš růst nebo přebírat odpovědnost. Znamená to, že se při každém klopýtnutí nemusíš ještě trestat.",
+    question: "Jak bych dnes mluvila sama se sebou, kdybych byla svou nejlepší přítelkyní?",
+    action: "Nahraď jednu tvrdou větu o sobě větou pravdivou a laskavou."
+  },
+  {
+    title: "Nemusíš mít všechno vyřešené",
+    category: "duvera",
+    symbol: "🌤️",
+    message: "Život se nemusí nejdřív dokonale uspořádat, abys v něm mohla zažívat radost. Můžeš mít otázky a přesto se smát. Můžeš být na cestě a přesto si užívat dnešek.",
+    question: "Co hezkého odkládám, dokud nebude všechno v pořádku?",
+    action: "Dopřej si dnes jednu obyčejnou radost bez podmínek."
+  },
+  {
+    title: "Tvůj příběh pokračuje",
+    category: "zmena",
+    symbol: "🌅",
+    message: "Nejsi na konci své cesty. Nemusíš vědět, jak bude vypadat další kapitola. Můžeš ji psát postupně, podle svých hodnot, zkušeností a toho, co se učíš. Ještě je před tebou spousta obyčejných i krásných okamžiků.",
+    question: "Jak bych chtěla, aby vypadal můj další malý krok?",
+    action: "Napiš si jednu větu o tom, čemu chceš v nadcházejících dnech věnovat více pozornosti."
+  }
 ];
 
-let selectedTopic = "vse";
-let currentMessage = null;
-let available = [];
+const grid = document.getElementById("cardGrid");
+const result = document.getElementById("result");
+const resultTitle = document.getElementById("resultTitle");
+const resultMessage = document.getElementById("resultMessage");
+const resultQuestion = document.getElementById("resultQuestion");
+const resultAction = document.getElementById("resultAction");
+const copyButton = document.getElementById("copyButton");
+const newCardButton = document.getElementById("newCardButton");
+const copyStatus = document.getElementById("copyStatus");
 
-const $ = id => document.getElementById(id);
+let selectedMessage = null;
+let currentFilter = "vse";
 
-function shuffle(array) {
-  const copy = [...array];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
+function renderCards() {
+  grid.innerHTML = "";
 
-function prepareCards() {
-  let pool = messages.filter(m =>
-    selectedTopic === "vse" || m.topic === selectedTopic
-  );
-  if (pool.length === 0) pool = messages;
-  available = shuffle(pool);
-  document.querySelectorAll(".card").forEach((card, i) => {
-    card.classList.remove("selected");
-    card.querySelector(".card-label").textContent =
-      ["První vzkaz", "Druhý vzkaz", "Třetí vzkaz"][i];
-    card.querySelector(".card-hint").textContent = "Otočit kartičku";
-  });
-  $("result").classList.add("hidden");
-  $("longLetter").classList.add("hidden");
-  $("hint").textContent = "Vyber si jednu ze tří kartiček. Každá skrývá jiný vzkaz.";
-}
-
-function showMessage(index) {
-  const message = available[index % available.length];
-  currentMessage = message;
-
-  $("resultTag").textContent = message.tag;
-  $("resultTitle").textContent = message.title;
-  $("resultLetter").textContent = message.short;
-  $("resultQuestion").textContent = message.question;
-  $("resultAction").textContent = message.action;
-  $("longTitle").textContent = message.title;
-  $("longText").textContent = message.long;
-  $("copyStatus").textContent = "";
-
-  document.querySelectorAll(".card").forEach((card, i) => {
-    card.querySelector(".card-label").textContent 
-          i === index ? "Tvůj vzkaz" : "Další vzkaz";
-    card.querySelector(".card-hint").textContent =
-      i === index ? "Vybráno ✨" : "Zkusit jinou";
-  });
-
-  $("result").classList.remove("hidden");
-  $("longLetter").classList.add("hidden");
-  $("hint").textContent = "Tahle kartička je tvým dnešním podnětem.";
-  $("result").scrollIntoView({behavior:"smooth", block:"start"});
-}
-
-document.querySelectorAll(".topic").forEach(button => {
-  button.addEventListener("click", () => {
-    selectedTopic = button.dataset.topic;
-    document.querySelectorAll(".topic").forEach(b =>
-      b.classList.toggle("active", b === button)
-    );
-    prepareCards();
-    $("hint").textContent = selectedTopic === "vse"
-      ? "Nech se překvapit a vyber si kartičku."
-      : "Vyber si kartičku na téma: " + button.textContent + ".";
-  });
-});
-
-document.querySelectorAll(".card").forEach(card => {
-  card.addEventListener("click", () => {
-    const index = Number(card.dataset.card);
-    if (available.length === 0) prepareCards();
-
-    if (currentMessage && available[index % available.length] === currentMessage) {
-      prepareCards();
+  messages.forEach((item, index) => {
+    if (currentFilter !== "vse" && item.category !== currentFilter) {
+      return;
     }
-    showMessage(index);
+
+    const button = document.createElement("button");
+    button.className = "card";
+    button.type = "button";
+    button.setAttribute("aria-label", "Otočit kartu " + (index + 1) + ": " + item.title);
+
+    const inner = document.createElement("div");
+    inner.className = "card-inner";
+
+    const front = document.createElement("div");
+    front.className = "card-front";
+
+    const number = document.createElement("span");
+    number.className = "card-number";
+    number.textContent = "ZASTAVENÍ " + String(index + 1).padStart(2, "0");
+
+    const symbol = document.createElement("span");
+    symbol.className = "card-symbol";
+    symbol.textContent = "✧";
+
+    const frontTitle = document.createElement("span");
+    frontTitle.className = "card-title";
+    frontTitle.textContent = "Tvůj vzkaz";
+
+    front.append(number, symbol, frontTitle);
+
+    const back = document.createElement("div");
+    back.className = "card-back";
+
+    const backSymbol = document.createElement("span");
+    backSymbol.className = "card-symbol";
+    backSymbol.textContent = item.symbol;
+
+    const backTitle = document.createElement("span");
+    backTitle.className = "card-title";
+    backTitle.textContent = item.title;
+
+    const hint = document.createElement("p");
+    hint.textContent = "Klepni a přečti si svůj vzkaz";
+
+    back.append(backSymbol, backTitle, hint);
+    inner.append(front, back);
+    button.appendChild(inner);
+
+    button.addEventListener("click", () => {
+      selectedMessage = item;
+
+      document.querySelectorAll(".card.flipped").forEach(card => {
+        card.classList.remove("flipped");
+      });
+
+      button.classList.add("flipped");
+
+      resultTitle.textContent = item.symbol + " " + item.title;
+      resultMessage.textContent = item.message;
+      resultQuestion.textContent = item.question;
+      resultAction.textContent = item.action;
+      copyStatus.textContent = "";
+      result.classList.add("visible");
+
+      result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    grid.appendChild(button);
+  });
+}
+
+document.querySelectorAll(".filter").forEach(button => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+
+    document.querySelectorAll(".filter").forEach(filter => {
+      filter.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    result.classList.remove("visible");
+    selectedMessage = null;
+    renderCards();
   });
 });
 
-$("longLetterBtn").addEventListener("click", () => {
-  $("longLetter").classList.remove("hidden");
-  $("longLetter").scrollIntoView({behavior:"smooth", block:"start"});
-});
+copyButton.addEventListener("click", async () => {
+  if (!selectedMessage) {
+    return;
+  }
 
-$("closeLetterBtn").addEventListener("click", () => {
-  $("longLetter").classList.add("hidden");
-  $("result").scrollIntoView({behavior:"smooth", block:"start"});
-});
-
-$("againBtn").addEventListener("click", () => {
-  prepareCards();
-  $("cards").scrollIntoView({behavior:"smooth", block:"center"});
-});
-
-$("copyBtn").addEventListener("click", async () => {
-  if (!currentMessage) return;
-
-  const text = currentMessage.title + "\n\n" +
-    currentMessage.short + "\n\nOtázka pro tebe:\n" +
-    currentMessage.question + "\n\nTvůj malý krok:\n" +
-    currentMessage.action;
+  const text =
+    selectedMessage.title + "\n\n" +
+    selectedMessage.message + "\n\n" +
+    "Otázka pro tebe: " + selectedMessage.question + "\n\n" +
+    "Malý krok pro dnešek: " + selectedMessage.action;
 
   try {
     await navigator.clipboard.writeText(text);
-    $("copyStatus").textContent = "Vzkaz je zkopírovaný. 💜";
+    copyStatus.textContent = "Tvůj vzkaz je zkopírovaný. 💗";
   } catch (error) {
-    const area = document.createElement("textarea");
-    area.value = text;
-    area.style.position = "fixed";
-    area.style.opacity = "0";
-    document.body.appendChild(area);
-    area.select();
-    const success = document.execCommand("copy");
-    area.remove();
-    $("copyStatus").textContent = success
-      ? "Vzkaz je zkopírovaný. 💜"
-      : "Kopírování se nepodařilo. Zkus text označit ručně.";
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+
+    copyStatus.textContent = copied
+      ? "Tvůj vzkaz je zkopírovaný. 💗"
+      : "Kopírování se nepodařilo. Zkus text označit a zkopírovat ručně.";
   }
 });
 
-prepareCards();
+newCardButton.addEventListener("click", () => {
+  result.classList.remove("visible");
+  selectedMessage = null;
+  grid.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+
+renderCards();
 </script>
 </body>
 </html>
