@@ -293,3 +293,84 @@ function showMessage(index) {
 
   document.querySelectorAll(".card").forEach((card, i) => {
     card.querySelector(".card-label").textContent 
+          i === index ? "Tvůj vzkaz" : "Další vzkaz";
+    card.querySelector(".card-hint").textContent =
+      i === index ? "Vybráno ✨" : "Zkusit jinou";
+  });
+
+  $("result").classList.remove("hidden");
+  $("longLetter").classList.add("hidden");
+  $("hint").textContent = "Tahle kartička je tvým dnešním podnětem.";
+  $("result").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+document.querySelectorAll(".topic").forEach(button => {
+  button.addEventListener("click", () => {
+    selectedTopic = button.dataset.topic;
+    document.querySelectorAll(".topic").forEach(b =>
+      b.classList.toggle("active", b === button)
+    );
+    prepareCards();
+    $("hint").textContent = selectedTopic === "vse"
+      ? "Nech se překvapit a vyber si kartičku."
+      : "Vyber si kartičku na téma: " + button.textContent + ".";
+  });
+});
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    const index = Number(card.dataset.card);
+    if (available.length === 0) prepareCards();
+
+    if (currentMessage && available[index % available.length] === currentMessage) {
+      prepareCards();
+    }
+    showMessage(index);
+  });
+});
+
+$("longLetterBtn").addEventListener("click", () => {
+  $("longLetter").classList.remove("hidden");
+  $("longLetter").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+$("closeLetterBtn").addEventListener("click", () => {
+  $("longLetter").classList.add("hidden");
+  $("result").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+$("againBtn").addEventListener("click", () => {
+  prepareCards();
+  $("cards").scrollIntoView({behavior:"smooth", block:"center"});
+});
+
+$("copyBtn").addEventListener("click", async () => {
+  if (!currentMessage) return;
+
+  const text = currentMessage.title + "\n\n" +
+    currentMessage.short + "\n\nOtázka pro tebe:\n" +
+    currentMessage.question + "\n\nTvůj malý krok:\n" +
+    currentMessage.action;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    $("copyStatus").textContent = "Vzkaz je zkopírovaný. 💜";
+  } catch (error) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    const success = document.execCommand("copy");
+    area.remove();
+    $("copyStatus").textContent = success
+      ? "Vzkaz je zkopírovaný. 💜"
+      : "Kopírování se nepodařilo. Zkus text označit ručně.";
+  }
+});
+
+prepareCards();
+</script>
+</body>
+</html>
